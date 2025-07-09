@@ -380,12 +380,21 @@
         max-width: 1200px;
       }
 
-      /* Cybersecurity Section */
-      .cyber-container {
+      /* DevOps Section */
+      .devops-container {
         width: 100%;
         max-width: 1200px;
         position: relative;
         height: 600px;
+      }
+      
+      /* Cybersecurity Section */
+      .cyber-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
       }
 
       .floating-square {
@@ -445,14 +454,6 @@
         box-shadow: 0 0 40px var(--neon-green);
       }
 
-      /* DevOps Section */
-      .devops-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        width: 100%;
-        max-width: 1200px;
-      }
 
       .tech-card {
         padding: 30px;
@@ -482,6 +483,88 @@
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-top: 1px solid var(--glass-border);
+      }
+      
+      /* Social Links Enhanced Styling */
+      .social-links {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        justify-content: center;
+      }
+      
+      .social-links a {
+        text-decoration: none;
+        font-size: 32px;
+        padding: 15px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .social-links a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+      
+      .social-links a:hover::before {
+        left: 100%;
+      }
+      
+      .social-links a:hover {
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
+      
+      .email {
+        color: var(--neon-cyan);
+        background: rgba(0, 255, 255, 0.1);
+        border: 2px solid var(--neon-cyan);
+      }
+      
+      .github {
+        color: var(--neon-blue);
+        background: rgba(0, 128, 255, 0.1);
+        border: 2px solid var(--neon-blue);
+      }
+      
+      .linkedin {
+        color: var(--neon-purple);
+        background: rgba(128, 0, 255, 0.1);
+        border: 2px solid var(--neon-purple);
+      }
+      
+      .whatsapp {
+        color: var(--neon-pink);
+        background: rgba(255, 0, 255, 0.1);
+        border: 2px solid var(--neon-pink);
+      }
+      
+      .social-links a:hover.email {
+        box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+      }
+      
+      .social-links a:hover.github {
+        box-shadow: 0 10px 20px rgba(0, 128, 255, 0.3);
+      }
+      
+      .social-links a:hover.linkedin {
+        box-shadow: 0 10px 20px rgba(128, 0, 255, 0.3);
+      }
+      
+      .social-links a:hover.whatsapp {
+        box-shadow: 0 10px 20px rgba(255, 0, 255, 0.3);
       }
 
       .footer-content {
@@ -618,7 +701,7 @@
           grid-template-columns: 1fr;
         }
 
-        .cyber-container {
+        .devops-container {
           height: auto;
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -630,7 +713,7 @@
           animation: none;
         }
 
-        .devops-grid {
+        .cyber-grid {
           grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         }
       }
@@ -946,7 +1029,7 @@
     <!-- DevOps & Cloud Infrastructure Section -->
     <section id="devops" class="scroll-reveal">
       <h2 class="section-title">DevOps & Cloud Infrastructure</h2>
-      <div class="cyber-container">
+      <div class="devops-container">
         <div class="floating-square glass">
           <div class="tech-icon">☁️</div>
           <h4>Azure Cloud</h4>
@@ -1013,7 +1096,7 @@
     <!-- Cybersecurity Section -->
     <section id="cyber-sec" class="scroll-reveal">
       <h2 class="section-title">Cybersecurity</h2>
-      <div class="devops-grid">
+      <div class="cyber-grid">
         <div class="tech-card glass">
           <div class="tech-icon">🔒</div>
           <h4>Kali Linux</h4>
@@ -1046,26 +1129,10 @@
           <li><a href="#">Terms of Service</a></li>
         </ul>
         <div class="social-links">
-          <a
-            href="#"
-            style="color: var(--neon-cyan); font-size: 24px; margin: 0 10px"
-            >📧</a
-          >
-          <a
-            href="#"
-            style="color: var(--neon-blue); font-size: 24px; margin: 0 10px"
-            >🐦</a
-          >
-          <a
-            href="#"
-            style="color: var(--neon-purple); font-size: 24px; margin: 0 10px"
-            >💼</a
-          >
-          <a
-            href="#"
-            style="color: var(--neon-pink); font-size: 24px; margin: 0 10px"
-            >📷</a
-          >
+          <a href="mailto:your.email@example.com" class="email" title="Send Email">📬</a>
+          <a href="https://github.com/yourusername" class="github" title="GitHub Profile" target="_blank">🐙</a>
+          <a href="https://linkedin.com/in/yourprofile" class="linkedin" title="LinkedIn Profile" target="_blank">🤝</a>
+          <a href="https://wa.me/1234567890" class="whatsapp" title="WhatsApp Chat" target="_blank">💬</a>
         </div>
       </div>
       <div class="fun-element">
