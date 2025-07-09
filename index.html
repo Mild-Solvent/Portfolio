@@ -826,7 +826,11 @@
       }
 
       .cookie-btn.accept {
-        background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+        background: linear-gradient(
+          45deg,
+          var(--neon-blue),
+          var(--neon-purple)
+        );
         color: white;
       }
 
@@ -1251,14 +1255,14 @@
     <!-- Footer -->
     <footer id="contact">
       <div class="footer-content">
-        <a href="#" class="coffee-btn">☕ Buy Me a Coffee</a>
+        <a href="coffee.html" class="coffee-btn">☕ Buy Me a Coffee</a>
         <ul class="footer-links">
           <li><a href="privacy.html">Privacy Policy</a></li>
           <li><a href="terms.html">Terms of Service</a></li>
         </ul>
         <div class="social-links">
           <a
-            href="mailto:your.email@example.com"
+            href="mailto:matejcik.denis@gmail.com"
             class="email"
             title="Send Email"
           >
@@ -1269,7 +1273,7 @@
             </svg>
           </a>
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/Mild-Solvent"
             class="github"
             title="GitHub Profile"
             target="_blank"
@@ -1281,7 +1285,7 @@
             </svg>
           </a>
           <a
-            href="https://linkedin.com/in/yourprofile"
+            href="https://www.linkedin.com/in/denis-matejcik/"
             class="linkedin"
             title="LinkedIn Profile"
             target="_blank"
@@ -1293,7 +1297,7 @@
             </svg>
           </a>
           <a
-            href="https://wa.me/1234567890"
+            href="https://wa.me/qr/QCT7GFP2BR2IG1"
             class="whatsapp"
             title="WhatsApp Chat"
             target="_blank"
@@ -1318,10 +1322,18 @@
     <!-- Cookie Popup -->
     <div id="cookiePopup" class="cookie-popup">
       <h3>🍪 Cookie Notice</h3>
-      <p>This website uses essential cookies to ensure proper functionality. We don't track or collect any personal data. This is a static site hosted on GitHub Pages.</p>
+      <p>
+        This website uses essential cookies to ensure proper functionality. We
+        don't track or collect any personal data. This is a static site hosted
+        on GitHub Pages.
+      </p>
       <div class="cookie-popup-buttons">
-        <button class="cookie-btn decline" onclick="declineCookies()">Decline</button>
-        <button class="cookie-btn accept" onclick="acceptCookies()">Accept</button>
+        <button class="cookie-btn decline" onclick="declineCookies()">
+          Decline
+        </button>
+        <button class="cookie-btn accept" onclick="acceptCookies()">
+          Accept
+        </button>
       </div>
     </div>
 
@@ -1529,33 +1541,33 @@
 
       // Cookie Popup Functions
       function showCookiePopup() {
-        const popup = document.getElementById('cookiePopup');
+        const popup = document.getElementById("cookiePopup");
         setTimeout(() => {
-          popup.classList.add('show');
+          popup.classList.add("show");
         }, 2000);
       }
 
       function acceptCookies() {
-        localStorage.setItem('cookieConsent', 'accepted');
+        localStorage.setItem("cookieConsent", "accepted");
         hideCookiePopup();
       }
 
       function declineCookies() {
-        localStorage.setItem('cookieConsent', 'declined');
+        localStorage.setItem("cookieConsent", "declined");
         hideCookiePopup();
       }
 
       function hideCookiePopup() {
-        const popup = document.getElementById('cookiePopup');
-        popup.classList.remove('show');
+        const popup = document.getElementById("cookiePopup");
+        popup.classList.remove("show");
         // Completely hide the popup after animation
         setTimeout(() => {
-          popup.style.display = 'none';
+          popup.style.display = "none";
         }, 300);
       }
 
       function checkCookieConsent() {
-        const consent = localStorage.getItem('cookieConsent');
+        const consent = localStorage.getItem("cookieConsent");
         if (!consent) {
           showCookiePopup();
         }
