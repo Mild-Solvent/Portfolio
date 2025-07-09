@@ -67,7 +67,18 @@
             transparent 50%
           );
         animation: gradientShift 60s ease-in-out infinite;
-        opacity: 0.3;
+        opacity: 0.15;
+      }
+
+      .background-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: -1;
+        pointer-events: none;
       }
 
       @keyframes gradientShift {
@@ -763,6 +774,78 @@
         }
       }
 
+      /* Cookie Popup */
+      .cookie-popup {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid var(--glass-border);
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        z-index: 10000;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .cookie-popup.show {
+        transform: translateY(0);
+      }
+
+      .cookie-popup h3 {
+        color: var(--neon-cyan);
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .cookie-popup p {
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      .cookie-popup-buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+
+      .cookie-btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .cookie-btn.accept {
+        background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+        color: white;
+      }
+
+      .cookie-btn.accept:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+      }
+
+      .cookie-btn.decline {
+        background: transparent;
+        color: var(--text-secondary);
+        border: 1px solid var(--glass-border);
+      }
+
+      .cookie-btn.decline:hover {
+        background: var(--glass-bg);
+        color: var(--text-primary);
+      }
+
       /* Reduced Motion */
       @media (prefers-reduced-motion: reduce) {
         * {
@@ -778,6 +861,7 @@
     <div class="background-container">
       <div class="gradient-bg"></div>
     </div>
+    <div class="background-overlay"></div>
     <div class="parallax-container"></div>
     <div class="particles" id="particles"></div>
 
@@ -1169,8 +1253,8 @@
       <div class="footer-content">
         <a href="#" class="coffee-btn">☕ Buy Me a Coffee</a>
         <ul class="footer-links">
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
         </ul>
         <div class="social-links">
           <a
@@ -1231,11 +1315,21 @@
       </div>
     </footer>
 
+    <!-- Cookie Popup -->
+    <div id="cookiePopup" class="cookie-popup">
+      <h3>🍪 Cookie Notice</h3>
+      <p>This website uses essential cookies to ensure proper functionality. We don't track or collect any personal data. This is a static site hosted on GitHub Pages.</p>
+      <div class="cookie-popup-buttons">
+        <button class="cookie-btn decline" onclick="declineCookies()">Decline</button>
+        <button class="cookie-btn accept" onclick="acceptCookies()">Accept</button>
+      </div>
+    </div>
+
     <script>
       // Particle System
       function createParticles() {
         const particlesContainer = document.getElementById("particles");
-        const particleCount = 50;
+        const particleCount = 20;
 
         for (let i = 0; i < particleCount; i++) {
           const particle = document.createElement("div");
@@ -1433,6 +1527,36 @@
         }
       }
 
+      // Cookie Popup Functions
+      function showCookiePopup() {
+        const popup = document.getElementById('cookiePopup');
+        setTimeout(() => {
+          popup.classList.add('show');
+        }, 2000);
+      }
+
+      function acceptCookies() {
+        localStorage.setItem('cookieConsent', 'accepted');
+        hideCookiePopup();
+      }
+
+      function declineCookies() {
+        localStorage.setItem('cookieConsent', 'declined');
+        hideCookiePopup();
+      }
+
+      function hideCookiePopup() {
+        const popup = document.getElementById('cookiePopup');
+        popup.classList.remove('show');
+      }
+
+      function checkCookieConsent() {
+        const consent = localStorage.getItem('cookieConsent');
+        if (!consent) {
+          showCookiePopup();
+        }
+      }
+
       // Initialize everything when DOM is loaded
       document.addEventListener("DOMContentLoaded", () => {
         createParticles();
@@ -1442,6 +1566,7 @@
         initHeaderEffect();
         addHoverParticles();
         autoRotateCarousels();
+        checkCookieConsent();
 
         // Add loading animation
         document.body.style.opacity = "0";
