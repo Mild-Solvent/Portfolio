@@ -1548,6 +1548,10 @@
       function hideCookiePopup() {
         const popup = document.getElementById('cookiePopup');
         popup.classList.remove('show');
+        // Completely hide the popup after animation
+        setTimeout(() => {
+          popup.style.display = 'none';
+        }, 300);
       }
 
       function checkCookieConsent() {
