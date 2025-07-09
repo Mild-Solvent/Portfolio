@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Name - Futuristic Portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: #0a0a0a;
+        color: #ffffff;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      /* Animated Background */
+      .bg-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: radial-gradient(
+            circle at 20% 80%,
+            #120458 0%,
+            transparent 50%
+          ),
+          radial-gradient(circle at 80% 20%, #ff006e 0%, transparent 50%),
+          radial-gradient(circle at 40% 40%, #00f5ff 0%, transparent 50%),
+          linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+        animation: bgShift 20s ease-in-out infinite;
+      }
+
+      @keyframes bgShift {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(1deg);
+        }
+      }
+
+      .parallax-element {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: rgba(0, 245, 255, 0.1);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .parallax-element:nth-child(1) {
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+      .parallax-element:nth-child(2) {
+        top: 20%;
+        right: 20%;
+        animation-delay: 2s;
+      }
+      .parallax-element:nth-child(3) {
+        top: 60%;
+        left: 30%;
+        animation-delay: 4s;
+      }
+      .parallax-element:nth-child(4) {
+        bottom: 20%;
+        right: 10%;
+        animation-delay: 1s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) scale(1);
+        }
+        50% {
+          transform: translateY(-20px) scale(1.1);
+        }
+      }
+
+      /* Glass Effect */
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 20px 50px;
+        transition: all 0.3s ease;
+      }
+
+      header.scrolled {
+        background: rgba(10, 10, 10, 0.9);
+        backdrop-filter: blur(20px);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        background: linear-gradient(45deg, #ff006e, #00f5ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+      }
+
+      .nav-links a {
+        color: #ffffff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(45deg, #ff006e, #00f5ff);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-links a:hover {
+        color: #00f5ff;
+        transform: translateY(-2px);
+      }
+
+      /* Sections */
+      section {
+        min-height: 100vh;
+        padding: 100px 50px;
+        position: relative;
+      }
+
+      .section-title {
+        font-size: 48px;
+        text-align: center;
+        margin-bottom: 50px;
+        background: linear-gradient(45deg, #ff006e, #00f5ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease;
+      }
+
+      .section-title.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Web Development Section */
+      .web-dev-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .project-card {
+        padding: 30px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(50px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 245, 255, 0.3);
+      }
+
+      .project-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(45deg, #ff006e, #00f5ff);
+        border-radius: 15px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: all 0.3s ease;
+      }
+
+      .project-card:hover .project-image {
+        background: linear-gradient(45deg, #00f5ff, #ff006e);
+      }
+
+      /* Game Development Section */
+      .game-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .game-card {
+        padding: 30px;
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.8s ease;
+      }
+
+      .game-card.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .carousel {
+        position: relative;
+        height: 250px;
+        overflow: hidden;
+        border-radius: 15px;
+        margin-bottom: 20px;
+      }
+
+      .carousel-inner {
+        display: flex;
+        transition: transform 0.5s ease;
+        height: 100%;
+      }
+
+      .carousel-slide {
+        min-width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #ff006e, #00f5ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+
+      .carousel-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .carousel-nav:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      .carousel-prev {
+        left: 10px;
+      }
+      .carousel-next {
+        right: 10px;
+      }
+
+      /* Mobile App Section */
+      .mobile-app {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        max-width: 1200px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+      }
+
+      .app-info {
+        flex: 1;
+        min-width: 300px;
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.8s ease;
+      }
+
+      .app-info.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .app-carousel {
+        flex: 1;
+        min-width: 300px;
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.8s ease;
+      }
+
+      .app-carousel.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Cybersecurity Section */
+      .cyber-tools {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .tool-card {
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: floatTool 4s ease-in-out infinite;
+      }
+
+      .tool-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .tool-card:hover {
+        transform: translateY(-10px) scale(1.1);
+        box-shadow: 0 15px 30px rgba(255, 0, 110, 0.3);
+      }
+
+      @keyframes floatTool {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      /* DevOps Section */
+      .devops-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .devops-card {
+        padding: 25px;
+        text-align: center;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      .devops-card.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .devops-card:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+      }
+
+      /* Footer */
+      footer {
+        padding: 50px;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: #ffffff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        padding: 10px 20px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-links a:hover {
+        background: rgba(255, 0, 110, 0.3);
+        transform: translateY(-3px);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        header {
+          padding: 15px 25px;
+        }
+
+        .nav-links {
+          gap: 15px;
+        }
+
+        section {
+          padding: 80px 25px;
+        }
+
+        .section-title {
+          font-size: 36px;
+        }
+
+        .mobile-app {
+          flex-direction: column;
+        }
+      }
+
+      /* Scroll Animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .slide-in-left {
+        opacity: 0;
+        transform: translateX(-100px);
+        transition: all 0.8s ease;
+      }
+
+      .slide-in-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .slide-in-right {
+        opacity: 0;
+        transform: translateX(100px);
+        transition: all 0.8s ease;
+      }
+
+      .slide-in-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-container">
+      <div class="parallax-element"></div>
+      <div class="parallax-element"></div>
+      <div class="parallax-element"></div>
+      <div class="parallax-element"></div>
+    </div>
+
+    <header id="header">
+      <nav>
+        <div class="logo">Your Name</div>
+        <ul class="nav-links">
+          <li><a href="#web-dev">Web Dev</a></li>
+          <li><a href="#game-dev">Games</a></li>
+          <li><a href="#mobile-dev">Mobile</a></li>
+          <li><a href="#cybersecurity">Security</a></li>
+          <li><a href="#devops">DevOps</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="web-dev" class="glass">
+      <h2 class="section-title">Web Development</h2>
+      <div class="fade-in">
+        <p
+          style="
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        >
+          I specialize in modern web development using React, Next.js, and
+          Vue.js. Creating responsive, interactive, and performant web
+          applications with cutting-edge technologies.
+        </p>
+      </div>
+      <div class="web-dev-grid">
+        <div
+          class="project-card glass"
+          onclick="window.open('https://google.com', '_blank')"
+        >
+          <div class="project-image">React Project</div>
+          <h3>Modern React App</h3>
+          <p>Built with React and modern tooling</p>
+        </div>
+        <div
+          class="project-card glass"
+          onclick="window.open('https://google.com', '_blank')"
+        >
+          <div class="project-image">Next.js Project</div>
+          <h3>Next.js Application</h3>
+          <p>Full-stack web application</p>
+        </div>
+        <div
+          class="project-card glass"
+          onclick="window.open('https://google.com', '_blank')"
+        >
+          <div class="project-image">Vue.js Project</div>
+          <h3>Vue.js Interface</h3>
+          <p>Interactive user interface</p>
+        </div>
+        <div
+          class="project-card glass"
+          onclick="window.open('https://google.com', '_blank')"
+        >
+          <div class="project-image">Web Platform</div>
+          <h3>Web Platform</h3>
+          <p>Complete web solution</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="game-dev" class="glass">
+      <h2 class="section-title">Game Development</h2>
+      <div class="fade-in">
+        <p
+          style="
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        >
+          Creating immersive gaming experiences using Unreal Engine 5, Godot,
+          and GDevelop. From concept to deployment, bringing interactive worlds
+          to life.
+        </p>
+      </div>
+      <div class="game-container">
+        <div class="game-card glass">
+          <div class="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-slide">Game Screenshot 1</div>
+              <div class="carousel-slide">Game Screenshot 2</div>
+              <div class="carousel-slide">Game Screenshot 3</div>
+            </div>
+            <button
+              class="carousel-nav carousel-prev"
+              onclick="previousSlide(0)"
+            >
+              ❮
+            </button>
+            <button class="carousel-nav carousel-next" onclick="nextSlide(0)">
+              ❯
+            </button>
+          </div>
+          <h3>Epic Adventure Game</h3>
+          <p>
+            An immersive RPG built with Unreal Engine 5 featuring stunning
+            visuals and engaging gameplay mechanics.
+          </p>
+          <button
+            class="glass"
+            style="
+              padding: 10px 20px;
+              margin-top: 15px;
+              border: none;
+              color: white;
+              cursor: pointer;
+              border-radius: 10px;
+            "
+          >
+            Download Game
+          </button>
+        </div>
+        <div class="game-card glass">
+          <div class="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-slide">Puzzle Game Screenshot 1</div>
+              <div class="carousel-slide">Puzzle Game Screenshot 2</div>
+              <div class="carousel-slide">Puzzle Game Screenshot 3</div>
+            </div>
+            <button
+              class="carousel-nav carousel-prev"
+              onclick="previousSlide(1)"
+            >
+              ❮
+            </button>
+            <button class="carousel-nav carousel-next" onclick="nextSlide(1)">
+              ❯
+            </button>
+          </div>
+          <h3>Puzzle Master</h3>
+          <p>
+            A challenging puzzle game created with Godot, featuring innovative
+            mechanics and beautiful 2D graphics.
+          </p>
+          <button
+            class="glass"
+            style="
+              padding: 10px 20px;
+              margin-top: 15px;
+              border: none;
+              color: white;
+              cursor: pointer;
+              border-radius: 10px;
+            "
+          >
+            Download Game
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="mobile-dev" class="glass">
+      <h2 class="section-title">Mobile App Development</h2>
+      <div class="mobile-app">
+        <div class="app-info">
+          <h3 style="font-size: 28px; margin-bottom: 20px">My Mobile App</h3>
+          <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px">
+            Developed using React Native and Kotlin, this mobile application
+            showcases modern mobile development practices with cross-platform
+            compatibility and native performance.
+          </p>
+          <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px">
+            The app features intuitive UI/UX design, offline functionality,
+            real-time data synchronization, and seamless integration with device
+            features.
+          </p>
+          <button
+            class="glass"
+            style="
+              padding: 15px 30px;
+              border: none;
+              color: white;
+              cursor: pointer;
+              border-radius: 10px;
+              font-size: 16px;
+            "
+          >
+            View Repository
+          </button>
+        </div>
+        <div class="app-carousel">
+          <div class="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-slide">App Screenshot 1</div>
+              <div class="carousel-slide">App Screenshot 2</div>
+              <div class="carousel-slide">App Screenshot 3</div>
+            </div>
+            <button
+              class="carousel-nav carousel-prev"
+              onclick="previousSlide(2)"
+            >
+              ❮
+            </button>
+            <button class="carousel-nav carousel-next" onclick="nextSlide(2)">
+              ❯
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cybersecurity" class="glass">
+      <h2 class="section-title">Cybersecurity</h2>
+      <div class="fade-in">
+        <p
+          style="
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        >
+          Specializing in penetration testing and security assessment using Kali
+          Linux and industry-standard tools. Protecting digital assets through
+          proactive security measures.
+        </p>
+      </div>
+      <div class="cyber-tools">
+        <div class="tool-card glass">
+          <h4>Kali Linux</h4>
+          <p>Primary penetration testing platform</p>
+        </div>
+        <div class="tool-card glass">
+          <h4>Nmap</h4>
+          <p>Network discovery and security auditing</p>
+        </div>
+        <div class="tool-card glass">
+          <h4>Metasploit</h4>
+          <p>Penetration testing framework</p>
+        </div>
+        <div class="tool-card glass">
+          <h4>Wireshark</h4>
+          <p>Network protocol analyzer</p>
+        </div>
+        <div class="tool-card glass">
+          <h4>Burp Suite</h4>
+          <p>Web application security testing</p>
+        </div>
+        <div class="tool-card glass">
+          <h4>John the Ripper</h4>
+          <p>Password cracking tool</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="devops" class="glass">
+      <h2 class="section-title">DevOps & Cloud</h2>
+      <div class="fade-in">
+        <p
+          style="
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        >
+          Expertise in cloud infrastructure, database management, and DevOps
+          practices. Streamlining development workflows and ensuring scalable,
+          reliable deployments.
+        </p>
+      </div>
+      <div class="devops-grid">
+        <div class="devops-card glass">
+          <h4>Azure Cloud</h4>
+          <p>Cloud computing platform</p>
+        </div>
+        <div class="devops-card glass">
+          <h4>Google Cloud</h4>
+          <p>GCP services and infrastructure</p>
+        </div>
+        <div class="devops-card glass">
+          <h4>MongoDB</h4>
+          <p>NoSQL database management</p>
+        </div>
+        <div class="devops-card glass">
+          <h4>PostgreSQL</h4>
+          <p>Advanced SQL database</p>
+        </div>
+        <div class="devops-card glass">
+          <h4>Docker</h4>
+          <p>Containerization platform</p>
+        </div>
+        <div class="devops-card glass">
+          <h4>Kubernetes</h4>
+          <p>Container orchestration</p>
+        </div>
+        <div class="devops-card glass">
+          <h4>Jenkins</h4>
+          <p>CI/CD automation</p>
+        </div>
+        <div class="devops-card glass">
+          <h4>DNS Management</h4>
+          <p>Domain and DNS configuration</p>
+        </div>
+        <div class="devops-card glass">
+          <h4>Web Hosting</h4>
+          <p>Server deployment and management</p>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact" class="glass">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="footer-links">
+        <a href="mailto:your.email@example.com">Email Me</a>
+        <a href="https://buymeacoffee.com/yourname" target="_blank"
+          >Buy Me a Coffee ☕</a
+        >
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
+        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank"
+          >LinkedIn</a
+        >
+      </div>
+      <p style="margin-top: 30px; opacity: 0.7">
+        © 2025 Your Name. Made with 💙 and lots of caffeine.
+      </p>
+      <p style="margin-top: 10px; opacity: 0.5; font-size: 14px">
+        Powered by pure HTML, CSS, and JavaScript magic ✨
+      </p>
+    </footer>
+
+    <script>
+      // Parallax effect
+      let parallaxElements = document.querySelectorAll(".parallax-element");
+
+      window.addEventListener("scroll", () => {
+        let scrolled = window.pageYOffset;
+        let rate = scrolled * -0.5;
+
+        parallaxElements.forEach((element, index) => {
+          let speed = 0.5 + index * 0.2;
+          element.style.transform = `translateY(${rate * speed}px)`;
+        });
+      });
+
+      // Header scroll effect
+      window.addEventListener("scroll", () => {
+        const header = document.getElementById("header");
+        if (window.scrollY > 100) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all animated elements
+      document
+        .querySelectorAll(
+          ".section-title, .project-card, .game-card, .app-info, .app-carousel, .tool-card, .devops-card, .fade-in, .slide-in-left, .slide-in-right"
+        )
+        .forEach((el) => {
+          observer.observe(el);
+        });
+
+      // Carousel functionality
+      const carousels = document.querySelectorAll(".carousel");
+      const carouselStates =
+        carousels.length > 0 ? new Array(carousels.length).fill(0) : [];
+
+      function nextSlide(carouselIndex) {
+        const carousel = carousels[carouselIndex];
+        const inner = carousel.querySelector(".carousel-inner");
+        const slides = carousel.querySelectorAll(".carousel-slide");
+
+        carouselStates[carouselIndex] =
+          (carouselStates[carouselIndex] + 1) % slides.length;
+        inner.style.transform = `translateX(-${
+          carouselStates[carouselIndex] * 100
+        }%)`;
+      }
+
+      function previousSlide(carouselIndex) {
+        const carousel = carousels[carouselIndex];
+        const inner = carousel.querySelector(".carousel-inner");
+        const slides = carousel.querySelectorAll(".carousel-slide");
+
+        carouselStates[carouselIndex] =
+          carouselStates[carouselIndex] <= 0
+            ? slides.length - 1
+            : carouselStates[carouselIndex] - 1;
+        inner.style.transform = `translateX(-${
+          carouselStates[carouselIndex] * 100
+        }%)`;
+      }
+
+      // Auto-advance carousels
+      setInterval(() => {
+        carousels.forEach((carousel, index) => {
+          nextSlide(index);
+        });
+      }, 5000);
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add hover effects to project cards
+      document.querySelectorAll(".project-card").forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          card.style.transform = "translateY(-10px) scale(1.05)";
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "translateY(0) scale(1)";
+        });
+      });
+
+      // Background animation enhancement
+      const bgContainer = document.querySelector(".bg-container");
+      let mouseX = 0;
+      let mouseY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX / window.innerWidth;
+        mouseY = e.clientY / window.innerHeight;
+
+        bgContainer.style.transform = `translate(${mouseX * 10}px, ${
+          mouseY * 10
+        }px)`;
+      });
+
+      // Loading animation
+      window.addEventListener("load", () => {
+        document.body.style.opacity = "1";
+        document.body.style.transform = "translateY(0)";
+      });
+
+      // Initialize
+      document.body.style.opacity = "0";
+      document.body.style.transform = "translateY(20px)";
+      document.body.style.transition = "all 0.8s ease";
+    </script>
+  </body>
+</html>
