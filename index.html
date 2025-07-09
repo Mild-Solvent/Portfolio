@@ -1,1044 +1,1222 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio - Futuristic Glass Design</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        :root {
-            --neon-blue: #00d4ff;
-            --neon-purple: #9b59b6;
-            --neon-pink: #ff006e;
-            --neon-green: #00ff88;
-            --neon-cyan: #00ffff;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-        }
+      :root {
+        --neon-blue: #00d4ff;
+        --neon-purple: #9b59b6;
+        --neon-pink: #ff006e;
+        --neon-green: #00ff88;
+        --neon-cyan: #00ffff;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+      }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #000000;
-            color: var(--text-primary);
-            overflow-x: hidden;
-            position: relative;
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background: #000000;
+        color: var(--text-primary);
+        overflow-x: hidden;
+        position: relative;
+      }
 
-        /* Animated Background */
-        .background-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
+      /* Animated Background */
+      .background-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        overflow: hidden;
+      }
 
-        .gradient-bg {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 20% 50%, var(--neon-blue) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, var(--neon-purple) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 20%, var(--neon-pink) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 10%, var(--neon-green) 0%, transparent 50%);
-            animation: gradientShift 20s ease-in-out infinite;
-            opacity: 0.3;
-        }
+      .gradient-bg {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+            circle at 20% 50%,
+            var(--neon-blue) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            var(--neon-purple) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 20%,
+            var(--neon-pink) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 10%,
+            var(--neon-green) 0%,
+            transparent 50%
+          );
+        animation: gradientShift 20s ease-in-out infinite;
+        opacity: 0.3;
+      }
 
-        @keyframes gradientShift {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(-10%, -10%) rotate(90deg); }
-            50% { transform: translate(-20%, 10%) rotate(180deg); }
-            75% { transform: translate(10%, -20%) rotate(270deg); }
+      @keyframes gradientShift {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
         }
-
-        /* Parallax Container */
-        .parallax-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+        25% {
+          transform: translate(-10%, -10%) rotate(90deg);
         }
-
-        /* Glass Effect Mixin */
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37),
-                        inset 0 0 20px rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
+        50% {
+          transform: translate(-20%, 10%) rotate(180deg);
         }
-
-        .glass::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-pink), var(--neon-green));
-            border-radius: 15px;
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.3s ease;
+        75% {
+          transform: translate(10%, -20%) rotate(270deg);
         }
+      }
 
-        .glass:hover::before {
-            opacity: 0.3;
-            animation: shimmer 2s ease-in-out infinite;
+      /* Parallax Container */
+      .parallax-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* Glass Effect Mixin */
+      .glass {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 15px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37),
+          inset 0 0 20px rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .glass::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(
+          45deg,
+          var(--neon-blue),
+          var(--neon-purple),
+          var(--neon-pink),
+          var(--neon-green)
+        );
+        border-radius: 15px;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.3s ease;
+      }
+
+      .glass:hover::before {
+        opacity: 0.3;
+        animation: shimmer 2s ease-in-out infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%) translateY(-100%) rotate(45deg);
         }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        100% {
+          transform: translateX(100%) translateY(100%) rotate(45deg);
         }
+      }
 
-        /* Header */
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 50px;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      header.glass {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: bold;
+        background: linear-gradient(
+          45deg,
+          var(--neon-blue),
+          var(--neon-purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px var(--neon-blue);
+        }
+        to {
+          text-shadow: 0 0 20px var(--neon-purple), 0 0 30px var(--neon-pink);
+        }
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        position: relative;
+        transition: all 0.3s ease;
+        padding: 10px 20px;
+        border-radius: 25px;
+      }
+
+      .nav-links a:hover {
+        background: var(--glass-bg);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+      }
+
+      /* Sections */
+      section {
+        min-height: 100vh;
+        padding: 120px 50px 80px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .section-title {
+        font-size: 48px;
+        margin-bottom: 50px;
+        text-align: center;
+        background: linear-gradient(
+          45deg,
+          var(--neon-cyan),
+          var(--neon-purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Web Development Section */
+      .web-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      .web-card {
+        aspect-ratio: 1;
+        cursor: pointer;
+        transition: all 0.5s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .web-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.5s ease;
+      }
+
+      .web-card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+      }
+
+      .web-card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .web-card:hover .web-card-content {
+        transform: translateY(0);
+      }
+
+      /* Game Development Section */
+      .game-container {
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      .game-item {
+        margin-bottom: 50px;
+        padding: 30px;
+      }
+
+      .carousel {
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+        border-radius: 15px;
+        margin-bottom: 20px;
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease;
+        height: 100%;
+      }
+
+      .carousel-slide {
+        min-width: 100%;
+        height: 100%;
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .carousel-controls {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+        transform: translateY(-50%);
+      }
+
+      .carousel-btn {
+        background: var(--glass-bg);
+        border: none;
+        color: var(--text-primary);
+        font-size: 24px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .carousel-btn:hover {
+        background: var(--neon-blue);
+        box-shadow: 0 0 20px var(--neon-blue);
+      }
+
+      .download-btn {
+        display: inline-block;
+        padding: 15px 40px;
+        background: linear-gradient(
+          45deg,
+          var(--neon-blue),
+          var(--neon-purple)
+        );
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .download-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px var(--neon-blue);
+      }
+
+      /* Mobile App Section */
+      .app-showcase {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      /* Cybersecurity Section */
+      .cyber-container {
+        width: 100%;
+        max-width: 1200px;
+        position: relative;
+        height: 600px;
+      }
+
+      .floating-square {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        padding: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        animation: float-physics 6s ease-in-out infinite;
+      }
+
+      @keyframes float-physics {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        25% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+        50% {
+          transform: translateY(0) rotate(-5deg);
+        }
+        75% {
+          transform: translateY(-10px) rotate(3deg);
+        }
+      }
+
+      .floating-square:nth-child(1) {
+        top: 0;
+        left: 10%;
+        animation-delay: 0s;
+      }
+      .floating-square:nth-child(2) {
+        top: 20%;
+        right: 20%;
+        animation-delay: 1s;
+      }
+      .floating-square:nth-child(3) {
+        bottom: 30%;
+        left: 30%;
+        animation-delay: 2s;
+      }
+      .floating-square:nth-child(4) {
+        bottom: 10%;
+        right: 10%;
+        animation-delay: 3s;
+      }
+
+      .floating-square:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 40px var(--neon-green);
+      }
+
+      /* DevOps Section */
+      .devops-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      .tech-card {
+        padding: 30px;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .tech-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+      }
+
+      .tech-icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+        background: linear-gradient(45deg, var(--neon-green), var(--neon-cyan));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Footer */
+      footer {
+        padding: 50px;
+        text-align: center;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid var(--glass-border);
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+      .coffee-btn {
+        display: inline-block;
+        padding: 15px 30px;
+        background: linear-gradient(45deg, #ff9800, #ff5722);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+      }
+
+      .coffee-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #ff9800;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+      }
+
+      .footer-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--neon-cyan);
+      }
+
+      .fun-element {
+        margin-top: 30px;
+        font-size: 14px;
+        color: var(--text-secondary);
+        animation: blink 2s ease-in-out infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      /* Particle System */
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--neon-cyan);
+        border-radius: 50%;
+        opacity: 0.5;
+        animation: particle-float 10s linear infinite;
+      }
+
+      @keyframes particle-float {
+        from {
+          transform: translateY(100vh) translateX(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.5;
+        }
+        90% {
+          opacity: 0.5;
+        }
+        to {
+          transform: translateY(-100px) translateX(100px);
+          opacity: 0;
+        }
+      }
+
+      /* Scroll Animations */
+      .scroll-reveal {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease;
+      }
+
+      .scroll-reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
         header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 50px;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        header.glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 10px var(--neon-blue); }
-            to { text-shadow: 0 0 20px var(--neon-purple), 0 0 30px var(--neon-pink); }
+          padding: 15px 20px;
         }
 
         .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
+          gap: 15px;
         }
 
-        .nav-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            position: relative;
-            transition: all 0.3s ease;
-            padding: 10px 20px;
-            border-radius: 25px;
-        }
-
-        .nav-links a:hover {
-            background: var(--glass-bg);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        }
-
-        /* Sections */
         section {
-            min-height: 100vh;
-            padding: 120px 50px 80px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+          padding: 80px 20px 50px;
         }
 
         .section-title {
-            font-size: 48px;
-            margin-bottom: 50px;
-            text-align: center;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: float 3s ease-in-out infinite;
+          font-size: 36px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Web Development Section */
         .web-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            width: 100%;
-            max-width: 1200px;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 20px;
         }
 
-        .web-card {
-            aspect-ratio: 1;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .web-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.5s ease;
-        }
-
-        .web-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
-        }
-
-        .web-card-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .web-card:hover .web-card-content {
-            transform: translateY(0);
-        }
-
-        /* Game Development Section */
-        .game-container {
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .game-item {
-            margin-bottom: 50px;
-            padding: 30px;
-        }
-
-        .carousel {
-            position: relative;
-            height: 400px;
-            overflow: hidden;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease;
-            height: 100%;
-        }
-
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .carousel-controls {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            transform: translateY(-50%);
-        }
-
-        .carousel-btn {
-            background: var(--glass-bg);
-            border: none;
-            color: var(--text-primary);
-            font-size: 24px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .carousel-btn:hover {
-            background: var(--neon-blue);
-            box-shadow: 0 0 20px var(--neon-blue);
-        }
-
-        .download-btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px var(--neon-blue);
-        }
-
-        /* Mobile App Section */
         .app-showcase {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-            width: 100%;
-            max-width: 1200px;
+          grid-template-columns: 1fr;
         }
 
-        /* Cybersecurity Section */
         .cyber-container {
-            width: 100%;
-            max-width: 1200px;
-            position: relative;
-            height: 600px;
+          height: auto;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
         }
 
         .floating-square {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            animation: float-physics 6s ease-in-out infinite;
+          position: relative;
+          animation: none;
         }
 
-        @keyframes float-physics {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(5deg); }
-            50% { transform: translateY(0) rotate(-5deg); }
-            75% { transform: translateY(-10px) rotate(3deg); }
-        }
-
-        .floating-square:nth-child(1) { top: 0; left: 10%; animation-delay: 0s; }
-        .floating-square:nth-child(2) { top: 20%; right: 20%; animation-delay: 1s; }
-        .floating-square:nth-child(3) { bottom: 30%; left: 30%; animation-delay: 2s; }
-        .floating-square:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 3s; }
-
-        .floating-square:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 40px var(--neon-green);
-        }
-
-        /* DevOps Section */
         .devops-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         }
+      }
 
-        .tech-card {
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
+      /* Reduced Motion */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
         }
-
-        .tech-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-        }
-
-        .tech-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Footer */
-        footer {
-            padding: 50px;
-            text-align: center;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .coffee-btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background: linear-gradient(45deg, #ff9800, #ff5722);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
-
-        .coffee-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #ff9800;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--neon-cyan);
-        }
-
-        .fun-element {
-            margin-top: 30px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            animation: blink 2s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Particle System */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--neon-cyan);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: particle-float 10s linear infinite;
-        }
-
-        @keyframes particle-float {
-            from {
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.5;
-            }
-            90% {
-                opacity: 0.5;
-            }
-            to {
-                transform: translateY(-100px) translateX(100px);
-                opacity: 0;
-            }
-        }
-
-        /* Scroll Animations */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
-        }
-
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
-            }
-
-            .nav-links {
-                gap: 15px;
-            }
-
-            section {
-                padding: 80px 20px 50px;
-            }
-
-            .section-title {
-                font-size: 36px;
-            }
-
-            .web-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 20px;
-            }
-
-            .app-showcase {
-                grid-template-columns: 1fr;
-            }
-
-            .cyber-container {
-                height: auto;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
-            .floating-square {
-                position: relative;
-                animation: none;
-            }
-
-            .devops-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-        }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Background Effects -->
     <div class="background-container">
-        <div class="gradient-bg"></div>
+      <div class="gradient-bg"></div>
     </div>
     <div class="parallax-container"></div>
     <div class="particles" id="particles"></div>
 
     <!-- Header -->
     <header class="glass">
-        <nav>
-            <div class="logo">Portfolio</div>
-            <ul class="nav-links">
-                <li><a href="#home">Name</a></li>
-                <li><a href="#contact">Contact Me</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <div class="logo">Portfolio</div>
+        <ul class="nav-links">
+          <li><a href="#home">Name</a></li>
+          <li><a href="#contact">Contact Me</a></li>
+        </ul>
+      </nav>
     </header>
 
     <!-- Web Development Section -->
     <section id="web-dev" class="scroll-reveal">
-        <h2 class="section-title">Web Development</h2>
-        <div class="web-grid">
-            <div class="web-card glass" onclick="window.open('https://google.com', '_blank')">
-                <img src="images/web1.jpg" alt="React Development" data-hover="images/web1-hover.jpg">
-                <div class="web-card-content">
-                    <h3>React Development</h3>
-                    <p>Modern React applications with hooks and state management</p>
-                </div>
-            </div>
-            <div class="web-card glass" onclick="window.open('https://google.com', '_blank')">
-                <img src="images/web2.jpg" alt="Next.js Development" data-hover="images/web2-hover.jpg">
-                <div class="web-card-content">
-                    <h3>Next.js Development</h3>
-                    <p>Full-stack applications with server-side rendering</p>
-                </div>
-            </div>
-            <div class="web-card glass" onclick="window.open('https://google.com', '_blank')">
-                <img src="images/web3.jpg" alt="Vue.js Development" data-hover="images/web3-hover.jpg">
-                <div class="web-card-content">
-                    <h3>Vue.js Development</h3>
-                    <p>Reactive applications with Vue 3 composition API</p>
-                </div>
-            </div>
-            <div class="web-card glass" onclick="window.open('https://google.com', '_blank')">
-                <img src="images/web4.jpg" alt="General Web Development" data-hover="images/web4-hover.jpg">
-                <div class="web-card-content">
-                    <h3>General Web Development</h3>
-                    <p>HTML5, CSS3, JavaScript ES6+ and modern web standards</p>
-                </div>
-            </div>
+      <h2 class="section-title">Web Development</h2>
+      <div class="web-grid">
+        <div
+          class="web-card glass"
+          onclick="window.open('https://google.com', '_blank')"
+        >
+          <img
+            src="images/web1.jpg"
+            alt="React Development"
+            data-hover="images/web1-hover.jpg"
+          />
+          <div class="web-card-content">
+            <h3>React Development</h3>
+            <p>Modern React applications with hooks and state management</p>
+          </div>
         </div>
+        <div
+          class="web-card glass"
+          onclick="window.open('https://google.com', '_blank')"
+        >
+          <img
+            src="images/web2.jpg"
+            alt="Next.js Development"
+            data-hover="images/web2-hover.jpg"
+          />
+          <div class="web-card-content">
+            <h3>Next.js Development</h3>
+            <p>Full-stack applications with server-side rendering</p>
+          </div>
+        </div>
+        <div
+          class="web-card glass"
+          onclick="window.open('https://google.com', '_blank')"
+        >
+          <img
+            src="images/web3.jpg"
+            alt="Vue.js Development"
+            data-hover="images/web3-hover.jpg"
+          />
+          <div class="web-card-content">
+            <h3>Vue.js Development</h3>
+            <p>Reactive applications with Vue 3 composition API</p>
+          </div>
+        </div>
+        <div
+          class="web-card glass"
+          onclick="window.open('https://google.com', '_blank')"
+        >
+          <img
+            src="images/web4.jpg"
+            alt="General Web Development"
+            data-hover="images/web4-hover.jpg"
+          />
+          <div class="web-card-content">
+            <h3>General Web Development</h3>
+            <p>HTML5, CSS3, JavaScript ES6+ and modern web standards</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Game Development Section -->
     <section id="game-dev" class="scroll-reveal">
-        <h2 class="section-title">Game Development</h2>
-        <div class="game-container">
-            <div class="game-item glass">
-                <h3>Epic Adventure Game</h3>
-                <div class="carousel">
-                    <div class="carousel-track" data-carousel="0">
-                        <div class="carousel-slide">
-                            <img src="images/game1-1.jpg" alt="Game Screenshot 1">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="images/game1-2.jpg" alt="Game Screenshot 2">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="images/game1-3.jpg" alt="Game Screenshot 3">
-                        </div>
-                    </div>
-                    <div class="carousel-controls">
-                        <button class="carousel-btn" onclick="moveCarousel(0, -1)">❮</button>
-                        <button class="carousel-btn" onclick="moveCarousel(0, 1)">❯</button>
-                    </div>
-                </div>
-                <p>An immersive adventure built with Unreal Engine 5, featuring stunning graphics and engaging gameplay mechanics.</p>
-                <a href="#" class="download-btn">Download Game</a>
+      <h2 class="section-title">Game Development</h2>
+      <div class="game-container">
+        <div class="game-item glass">
+          <h3>Epic Adventure Game</h3>
+          <div class="carousel">
+            <div class="carousel-track" data-carousel="0">
+              <div class="carousel-slide">
+                <img src="images/game1-1.jpg" alt="Game Screenshot 1" />
+              </div>
+              <div class="carousel-slide">
+                <img src="images/game1-2.jpg" alt="Game Screenshot 2" />
+              </div>
+              <div class="carousel-slide">
+                <img src="images/game1-3.jpg" alt="Game Screenshot 3" />
+              </div>
             </div>
-            
-            <div class="game-item glass">
-                <h3>Pixel Perfect Platformer</h3>
-                <div class="carousel">
-                    <div class="carousel-track" data-carousel="1">
-                        <div class="carousel-slide">
-                            <img src="images/game2-1.jpg" alt="Game Screenshot 1">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="images/game2-2.jpg" alt="Game Screenshot 2">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="images/game2-3.jpg" alt="Game Screenshot 3">
-                        </div>
-                    </div>
-                    <div class="carousel-controls">
-                        <button class="carousel-btn" onclick="moveCarousel(1, -1)">❮</button>
-                        <button class="carousel-btn" onclick="moveCarousel(1, 1)">❯</button>
-                    </div>
-                </div>
-                <p>A retro-style platformer created with Godot, featuring tight controls and challenging levels.</p>
-                <a href="#" class="download-btn">Download Game</a>
+            <div class="carousel-controls">
+              <button class="carousel-btn" onclick="moveCarousel(0, -1)">
+                ❮
+              </button>
+              <button class="carousel-btn" onclick="moveCarousel(0, 1)">
+                ❯
+              </button>
             </div>
+          </div>
+          <p>
+            An immersive adventure built with Unreal Engine 5, featuring
+            stunning graphics and engaging gameplay mechanics.
+          </p>
+          <a href="#" class="download-btn">Download Game</a>
         </div>
+
+        <div class="game-item glass">
+          <h3>Pixel Perfect Platformer</h3>
+          <div class="carousel">
+            <div class="carousel-track" data-carousel="1">
+              <div class="carousel-slide">
+                <img src="images/game2-1.jpg" alt="Game Screenshot 1" />
+              </div>
+              <div class="carousel-slide">
+                <img src="images/game2-2.jpg" alt="Game Screenshot 2" />
+              </div>
+              <div class="carousel-slide">
+                <img src="images/game2-3.jpg" alt="Game Screenshot 3" />
+              </div>
+            </div>
+            <div class="carousel-controls">
+              <button class="carousel-btn" onclick="moveCarousel(1, -1)">
+                ❮
+              </button>
+              <button class="carousel-btn" onclick="moveCarousel(1, 1)">
+                ❯
+              </button>
+            </div>
+          </div>
+          <p>
+            A retro-style platformer created with Godot, featuring tight
+            controls and challenging levels.
+          </p>
+          <a href="#" class="download-btn">Download Game</a>
+        </div>
+      </div>
     </section>
 
     <!-- Mobile App Development Section -->
     <section id="mobile-dev" class="scroll-reveal">
-        <h2 class="section-title">Mobile App Development</h2>
-        <div class="app-showcase">
-            <div class="glass" style="padding: 30px;">
-                <h3>Cross-Platform Excellence</h3>
-                <div class="carousel" style="height: 300px; margin-bottom: 20px;">
-                    <div class="carousel-track" data-carousel="2">
-                        <div class="carousel-slide">
-                            <img src="images/app1-1.jpg" alt="App Screenshot 1">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="images/app1-2.jpg" alt="App Screenshot 2">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="images/app1-3.jpg" alt="App Screenshot 3">
-                        </div>
-                    </div>
-                    <div class="carousel-controls">
-                        <button class="carousel-btn" onclick="moveCarousel(2, -1)">❮</button>
-                        <button class="carousel-btn" onclick="moveCarousel(2, 1)">❯</button>
-                    </div>
-                </div>
-                <a href="#" class="download-btn">View Repository</a>
+      <h2 class="section-title">Mobile App Development</h2>
+      <div class="app-showcase">
+        <div class="glass" style="padding: 30px">
+          <h3>Cross-Platform Excellence</h3>
+          <div class="carousel" style="height: 300px; margin-bottom: 20px">
+            <div class="carousel-track" data-carousel="2">
+              <div class="carousel-slide">
+                <img src="images/app1-1.jpg" alt="App Screenshot 1" />
+              </div>
+              <div class="carousel-slide">
+                <img src="images/app1-2.jpg" alt="App Screenshot 2" />
+              </div>
+              <div class="carousel-slide">
+                <img src="images/app1-3.jpg" alt="App Screenshot 3" />
+              </div>
             </div>
-            <div>
-                <h3>Technologies</h3>
-                <div class="tech-list">
-                    <div class="glass" style="padding: 20px; margin-bottom: 20px;">
-                        <h4 style="color: var(--neon-cyan); margin-bottom: 10px;">React Native</h4>
-                        <p>Building performant cross-platform mobile applications with a single codebase, leveraging the power of React ecosystem.</p>
-                    </div>
-                    <div class="glass" style="padding: 20px;">
-                        <h4 style="color: var(--neon-purple); margin-bottom: 10px;">Kotlin</h4>
-                        <p>Native Android development with modern Kotlin features, creating smooth and efficient mobile experiences.</p>
-                    </div>
-                </div>
+            <div class="carousel-controls">
+              <button class="carousel-btn" onclick="moveCarousel(2, -1)">
+                ❮
+              </button>
+              <button class="carousel-btn" onclick="moveCarousel(2, 1)">
+                ❯
+              </button>
             </div>
+          </div>
+          <a href="#" class="download-btn">View Repository</a>
         </div>
+        <div>
+          <h3>Technologies</h3>
+          <div class="tech-list">
+            <div class="glass" style="padding: 20px; margin-bottom: 20px">
+              <h4 style="color: var(--neon-cyan); margin-bottom: 10px">
+                React Native
+              </h4>
+              <p>
+                Building performant cross-platform mobile applications with a
+                single codebase, leveraging the power of React ecosystem.
+              </p>
+            </div>
+            <div class="glass" style="padding: 20px">
+              <h4 style="color: var(--neon-purple); margin-bottom: 10px">
+                Kotlin
+              </h4>
+              <p>
+                Native Android development with modern Kotlin features, creating
+                smooth and efficient mobile experiences.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Cybersecurity Section -->
     <section id="cyber-sec" class="scroll-reveal">
-        <h2 class="section-title">Cybersecurity</h2>
-        <div class="cyber-container">
-            <div class="floating-square glass">
-                <div class="tech-icon">🔒</div>
-                <h4>Kali Linux</h4>
-                <p>Advanced penetration testing</p>
-            </div>
-            <div class="floating-square glass">
-                <div class="tech-icon">🛡️</div>
-                <h4>Network Security</h4>
-                <p>Firewall & IDS configuration</p>
-            </div>
-            <div class="floating-square glass">
-                <div class="tech-icon">🔍</div>
-                <h4>Vulnerability Assessment</h4>
-                <p>Security auditing & scanning</p>
-            </div>
-            <div class="floating-square glass">
-                <div class="tech-icon">🗝️</div>
-                <h4>Cryptography</h4>
-                <p>Encryption & secure protocols</p>
-            </div>
+      <h2 class="section-title">Cybersecurity</h2>
+      <div class="cyber-container">
+        <div class="floating-square glass">
+          <div class="tech-icon">🔒</div>
+          <h4>Kali Linux</h4>
+          <p>Advanced penetration testing</p>
         </div>
+        <div class="floating-square glass">
+          <div class="tech-icon">🛡️</div>
+          <h4>Network Security</h4>
+          <p>Firewall & IDS configuration</p>
+        </div>
+        <div class="floating-square glass">
+          <div class="tech-icon">🔍</div>
+          <h4>Vulnerability Assessment</h4>
+          <p>Security auditing & scanning</p>
+        </div>
+        <div class="floating-square glass">
+          <div class="tech-icon">🗝️</div>
+          <h4>Cryptography</h4>
+          <p>Encryption & secure protocols</p>
+        </div>
+      </div>
     </section>
 
     <!-- DevOps & Cloud Section -->
     <section id="devops" class="scroll-reveal">
-        <h2 class="section-title">DevOps & Cloud Infrastructure</h2>
-        <div class="devops-grid">
-            <div class="tech-card glass">
-                <div class="tech-icon">☁️</div>
-                <h4>Azure Cloud</h4>
-                <p>Enterprise cloud solutions</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">🌐</div>
-                <h4>Google Cloud</h4>
-                <p>Scalable cloud architecture</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">🍃</div>
-                <h4>MongoDB</h4>
-                <p>NoSQL database management</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">🗄️</div>
-                <h4>SQL Databases</h4>
-                <p>Relational database design</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">🐳</div>
-                <h4>Docker</h4>
-                <p>Container orchestration</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">☸️</div>
-                <h4>Kubernetes</h4>
-                <p>Container management at scale</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">🔄</div>
-                <h4>CI/CD</h4>
-                <p>Automated deployment pipelines</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">⚡</div>
-                <h4>Serverless</h4>
-                <p>Function-as-a-Service solutions</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">🌍</div>
-                <h4>CDN</h4>
-                <p>Content delivery networks</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">🔐</div>
-                <h4>SSL/TLS</h4>
-                <p>Security certificates</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">⚖️</div>
-                <h4>Load Balancing</h4>
-                <p>Traffic distribution</p>
-            </div>
-            <div class="tech-card glass">
-                <div class="tech-icon">🌐</div>
-                <h4>DNS Management</h4>
-                <p>Domain configuration</p>
-            </div>
+      <h2 class="section-title">DevOps & Cloud Infrastructure</h2>
+      <div class="devops-grid">
+        <div class="tech-card glass">
+          <div class="tech-icon">☁️</div>
+          <h4>Azure Cloud</h4>
+          <p>Enterprise cloud solutions</p>
         </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">🌐</div>
+          <h4>Google Cloud</h4>
+          <p>Scalable cloud architecture</p>
+        </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">🍃</div>
+          <h4>MongoDB</h4>
+          <p>NoSQL database management</p>
+        </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">🗄️</div>
+          <h4>SQL Databases</h4>
+          <p>Relational database design</p>
+        </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">🐳</div>
+          <h4>Docker</h4>
+          <p>Container orchestration</p>
+        </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">☸️</div>
+          <h4>Kubernetes</h4>
+          <p>Container management at scale</p>
+        </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">🔄</div>
+          <h4>CI/CD</h4>
+          <p>Automated deployment pipelines</p>
+        </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">⚡</div>
+          <h4>Serverless</h4>
+          <p>Function-as-a-Service solutions</p>
+        </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">🌍</div>
+          <h4>CDN</h4>
+          <p>Content delivery networks</p>
+        </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">🔐</div>
+          <h4>SSL/TLS</h4>
+          <p>Security certificates</p>
+        </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">⚖️</div>
+          <h4>Load Balancing</h4>
+          <p>Traffic distribution</p>
+        </div>
+        <div class="tech-card glass">
+          <div class="tech-icon">🌐</div>
+          <h4>DNS Management</h4>
+          <p>Domain configuration</p>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer id="contact">
-        <div class="footer-content">
-            <a href="#" class="coffee-btn">☕ Buy Me a Coffee</a>
-            <ul class="footer-links">
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-            </ul>
-            <div class="social-links">
-                <a href="#" style="color: var(--neon-cyan); font-size: 24px; margin: 0 10px;">📧</a>
-                <a href="#" style="color: var(--neon-blue); font-size: 24px; margin: 0 10px;">🐦</a>
-                <a href="#" style="color: var(--neon-purple); font-size: 24px; margin: 0 10px;">💼</a>
-                <a href="#" style="color: var(--neon-pink); font-size: 24px; margin: 0 10px;">📷</a>
-            </div>
+      <div class="footer-content">
+        <a href="#" class="coffee-btn">☕ Buy Me a Coffee</a>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+        <div class="social-links">
+          <a
+            href="#"
+            style="color: var(--neon-cyan); font-size: 24px; margin: 0 10px"
+            >📧</a
+          >
+          <a
+            href="#"
+            style="color: var(--neon-blue); font-size: 24px; margin: 0 10px"
+            >🐦</a
+          >
+          <a
+            href="#"
+            style="color: var(--neon-purple); font-size: 24px; margin: 0 10px"
+            >💼</a
+          >
+          <a
+            href="#"
+            style="color: var(--neon-pink); font-size: 24px; margin: 0 10px"
+            >📷</a
+          >
         </div>
-        <div class="fun-element">
-            <p>🚀 Made with love and way too much coffee | Last caffeinated: Just now ☕</p>
-            <p style="margin-top: 10px;">✨ May the code be with you ✨</p>
-        </div>
+      </div>
+      <div class="fun-element">
+        <p>
+          🚀 Made with love and way too much coffee | Last caffeinated: Just now
+          ☕
+        </p>
+        <p style="margin-top: 10px">✨ May the code be with you ✨</p>
+      </div>
     </footer>
 
     <script>
-        // Particle System
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                
-                const colors = ['var(--neon-blue)', 'var(--neon-purple)', 'var(--neon-pink)', 'var(--neon-green)', 'var(--neon-cyan)'];
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
+      // Particle System
+      function createParticles() {
+        const particlesContainer = document.getElementById("particles");
+        const particleCount = 50;
 
-        // Parallax Effect
-        function initParallax() {
-            const parallaxContainer = document.querySelector('.parallax-container');
-            const gradientBg = document.querySelector('.gradient-bg');
-            
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const parallaxSpeed = 0.5;
-                
-                gradientBg.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-                
-                // Add floating particles on scroll
-                if (Math.random() > 0.98) {
-                    createScrollParticle();
-                }
-            });
-        }
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement("div");
+          particle.className = "particle";
+          particle.style.left = Math.random() * 100 + "%";
+          particle.style.animationDelay = Math.random() * 10 + "s";
+          particle.style.animationDuration = Math.random() * 10 + 10 + "s";
 
-        // Create particles on scroll
-        function createScrollParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = window.pageYOffset + window.innerHeight + 'px';
-            particle.style.animation = 'particle-float 5s linear forwards';
-            
-            document.getElementById('particles').appendChild(particle);
-            
-            setTimeout(() => particle.remove(), 5000);
-        }
+          const colors = [
+            "var(--neon-blue)",
+            "var(--neon-purple)",
+            "var(--neon-pink)",
+            "var(--neon-green)",
+            "var(--neon-cyan)",
+          ];
+          particle.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
 
-        // Carousel Functionality
-        let carouselPositions = [0, 0, 0];
-        
-        function moveCarousel(carouselIndex, direction) {
-            const carousel = document.querySelector(`[data-carousel="${carouselIndex}"]`);
-            const slides = carousel.children.length;
-            
-            carouselPositions[carouselIndex] += direction;
-            
-            if (carouselPositions[carouselIndex] < 0) {
-                carouselPositions[carouselIndex] = slides - 1;
-            } else if (carouselPositions[carouselIndex] >= slides) {
-                carouselPositions[carouselIndex] = 0;
-            }
-            
-            carousel.style.transform = `translateX(-${carouselPositions[carouselIndex] * 100}%)`;
+          particlesContainer.appendChild(particle);
         }
+      }
 
-        // Auto-rotate carousels
-        function autoRotateCarousels() {
-            setInterval(() => {
-                for (let i = 0; i < carouselPositions.length; i++) {
-                    moveCarousel(i, 1);
-                }
-            }, 5000);
-        }
+      // Parallax Effect
+      function initParallax() {
+        const parallaxContainer = document.querySelector(".parallax-container");
+        const gradientBg = document.querySelector(".gradient-bg");
 
-        // Image Hover Effect
-        function initImageHovers() {
-            const webCards = document.querySelectorAll('.web-card img');
-            
-            webCards.forEach(img => {
-                const originalSrc = img.src;
-                const hoverSrc = img.dataset.hover;
-                
-                if (hoverSrc) {
-                    img.parentElement.addEventListener('mouseenter', () => {
-                        img.src = hoverSrc;
-                    });
-                    
-                    img.parentElement.addEventListener('mouseleave', () => {
-                        img.src = originalSrc;
-                    });
-                }
-            });
-        }
+        window.addEventListener("scroll", () => {
+          const scrolled = window.pageYOffset;
+          const parallaxSpeed = 0.5;
 
-        // Scroll Reveal Animation
-        function initScrollReveal() {
-            const reveals = document.querySelectorAll('.scroll-reveal');
-            
-            function revealOnScroll() {
-                reveals.forEach(element => {
-                    const windowHeight = window.innerHeight;
-                    const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 150;
-                    
-                    if (elementTop < windowHeight - elementVisible) {
-                        element.classList.add('active');
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', revealOnScroll);
-            revealOnScroll(); // Check on load
-        }
+          gradientBg.style.transform = `translateY(${
+            scrolled * parallaxSpeed
+          }px)`;
 
-        // Header Glass Effect on Scroll
-        function initHeaderEffect() {
-            const header = document.querySelector('header');
-            
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('glass');
-                } else {
-                    header.classList.remove('glass');
-                }
-            });
-        }
-
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+          // Add floating particles on scroll
+          if (Math.random() > 0.98) {
+            createScrollParticle();
+          }
         });
+      }
 
-        // Hover particle effects for interactive elements
-        function addHoverParticles() {
-            const interactiveElements = document.querySelectorAll('.glass, .download-btn, .tech-card');
-            
-            interactiveElements.forEach(element => {
-                element.addEventListener('mouseenter', (e) => {
-                    createHoverParticles(e.target);
-                });
+      // Create particles on scroll
+      function createScrollParticle() {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.left = Math.random() * 100 + "%";
+        particle.style.top = window.pageYOffset + window.innerHeight + "px";
+        particle.style.animation = "particle-float 5s linear forwards";
+
+        document.getElementById("particles").appendChild(particle);
+
+        setTimeout(() => particle.remove(), 5000);
+      }
+
+      // Carousel Functionality
+      let carouselPositions = [0, 0, 0];
+
+      function moveCarousel(carouselIndex, direction) {
+        const carousel = document.querySelector(
+          `[data-carousel="${carouselIndex}"]`
+        );
+        const slides = carousel.children.length;
+
+        carouselPositions[carouselIndex] += direction;
+
+        if (carouselPositions[carouselIndex] < 0) {
+          carouselPositions[carouselIndex] = slides - 1;
+        } else if (carouselPositions[carouselIndex] >= slides) {
+          carouselPositions[carouselIndex] = 0;
+        }
+
+        carousel.style.transform = `translateX(-${
+          carouselPositions[carouselIndex] * 100
+        }%)`;
+      }
+
+      // Auto-rotate carousels
+      function autoRotateCarousels() {
+        setInterval(() => {
+          for (let i = 0; i < carouselPositions.length; i++) {
+            moveCarousel(i, 1);
+          }
+        }, 5000);
+      }
+
+      // Image Hover Effect
+      function initImageHovers() {
+        const webCards = document.querySelectorAll(".web-card img");
+
+        webCards.forEach((img) => {
+          const originalSrc = img.src;
+          const hoverSrc = img.dataset.hover;
+
+          if (hoverSrc) {
+            img.parentElement.addEventListener("mouseenter", () => {
+              img.src = hoverSrc;
             });
-        }
 
-        function createHoverParticles(element) {
-            const rect = element.getBoundingClientRect();
-            const particleCount = 5;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'fixed';
-                particle.style.width = '4px';
-                particle.style.height = '4px';
-                particle.style.background = 'var(--neon-cyan)';
-                particle.style.borderRadius = '50%';
-                particle.style.pointerEvents = 'none';
-                particle.style.zIndex = '9999';
-                particle.style.left = rect.left + Math.random() * rect.width + 'px';
-                particle.style.top = rect.top + Math.random() * rect.height + 'px';
-                particle.style.transition = 'all 1s ease-out';
-                particle.style.opacity = '1';
-                
-                document.body.appendChild(particle);
-                
-                setTimeout(() => {
-                    particle.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
-                    particle.style.opacity = '0';
-                }, 10);
-                
-                setTimeout(() => particle.remove(), 1000);
-            }
-        }
-
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            initParallax();
-            initImageHovers();
-            initScrollReveal();
-            initHeaderEffect();
-            addHoverParticles();
-            autoRotateCarousels();
-            
-            // Add loading animation
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                document.body.style.transition = 'opacity 1s ease';
-                document.body.style.opacity = '1';
-            }, 100);
+            img.parentElement.addEventListener("mouseleave", () => {
+              img.src = originalSrc;
+            });
+          }
         });
+      }
 
-        // Performance optimization for animations
-        let ticking = false;
-        function requestTick() {
-            if (!ticking) {
-                window.requestAnimationFrame(updateAnimations);
-                ticking = true;
+      // Scroll Reveal Animation
+      function initScrollReveal() {
+        const reveals = document.querySelectorAll(".scroll-reveal");
+
+        function revealOnScroll() {
+          reveals.forEach((element) => {
+            const windowHeight = window.innerHeight;
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+
+            if (elementTop < windowHeight - elementVisible) {
+              element.classList.add("active");
             }
+          });
         }
 
-        function updateAnimations() {
-            ticking = false;
-        }
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll(); // Check on load
+      }
 
-        window.addEventListener('scroll', requestTick);
-        window.addEventListener('resize', requestTick);
+      // Header Glass Effect on Scroll
+      function initHeaderEffect() {
+        const header = document.querySelector("header");
+
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) {
+            header.classList.add("glass");
+          } else {
+            header.classList.remove("glass");
+          }
+        });
+      }
+
+      // Smooth Scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Hover particle effects for interactive elements
+      function addHoverParticles() {
+        const interactiveElements = document.querySelectorAll(
+          ".glass, .download-btn, .tech-card"
+        );
+
+        interactiveElements.forEach((element) => {
+          element.addEventListener("mouseenter", (e) => {
+            createHoverParticles(e.target);
+          });
+        });
+      }
+
+      function createHoverParticles(element) {
+        const rect = element.getBoundingClientRect();
+        const particleCount = 5;
+
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement("div");
+          particle.style.position = "fixed";
+          particle.style.width = "4px";
+          particle.style.height = "4px";
+          particle.style.background = "var(--neon-cyan)";
+          particle.style.borderRadius = "50%";
+          particle.style.pointerEvents = "none";
+          particle.style.zIndex = "9999";
+          particle.style.left = rect.left + Math.random() * rect.width + "px";
+          particle.style.top = rect.top + Math.random() * rect.height + "px";
+          particle.style.transition = "all 1s ease-out";
+          particle.style.opacity = "1";
+
+          document.body.appendChild(particle);
+
+          setTimeout(() => {
+            particle.style.transform = `translate(${
+              (Math.random() - 0.5) * 100
+            }px, ${(Math.random() - 0.5) * 100}px)`;
+            particle.style.opacity = "0";
+          }, 10);
+
+          setTimeout(() => particle.remove(), 1000);
+        }
+      }
+
+      // Initialize everything when DOM is loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        createParticles();
+        initParallax();
+        initImageHovers();
+        initScrollReveal();
+        initHeaderEffect();
+        addHoverParticles();
+        autoRotateCarousels();
+
+        // Add loading animation
+        document.body.style.opacity = "0";
+        setTimeout(() => {
+          document.body.style.transition = "opacity 1s ease";
+          document.body.style.opacity = "1";
+        }, 100);
+      });
+
+      // Performance optimization for animations
+      let ticking = false;
+      function requestTick() {
+        if (!ticking) {
+          window.requestAnimationFrame(updateAnimations);
+          ticking = true;
+        }
+      }
+
+      function updateAnimations() {
+        ticking = false;
+      }
+
+      window.addEventListener("scroll", requestTick);
+      window.addEventListener("resize", requestTick);
     </script>
-</body>
+  </body>
 </html>
