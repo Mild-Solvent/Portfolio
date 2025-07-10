@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Me - Denis Matejčík</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --neon-blue: #00d4ff;
+        --neon-purple: #9b59b6;
+        --neon-pink: #ff006e;
+        --neon-green: #00ff88;
+        --neon-cyan: #00ffff;
+        --neon-orange: #ff9800;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: #000000;
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Background Effects */
+      .background-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -3;
+        overflow: hidden;
+      }
+
+      .gradient-bg {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+            circle at 20% 50%,
+            var(--neon-blue) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            var(--neon-purple) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 20%,
+            var(--neon-pink) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 60% 60%,
+            var(--neon-green) 0%,
+            transparent 50%
+          );
+        animation: gradientShift 60s ease-in-out infinite;
+        opacity: 0.1;
+      }
+
+      .background-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: -2;
+        pointer-events: none;
+      }
+
+      @keyframes gradientShift {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        50% {
+          transform: translate(-20%, 10%) rotate(180deg);
+        }
+      }
+
+      /* Glass Effect */
+      .glass {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 15px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 50px;
+        z-index: 1000;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--glass-border);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        background: linear-gradient(
+          45deg,
+          var(--neon-blue),
+          var(--neon-purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        padding: 10px 20px;
+        border-radius: 25px;
+      }
+
+      .nav-links a:hover {
+        background: var(--glass-bg);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+      }
+
+      /* Main Content */
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 120px 20px 80px;
+      }
+
+      .content-container {
+        padding: 40px;
+      }
+
+      h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        text-align: center;
+        background: linear-gradient(
+          45deg,
+          var(--neon-cyan),
+          var(--neon-purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .contact-emoji {
+        font-size: 60px;
+        text-align: center;
+        margin-bottom: 20px;
+        animation: wave 2s ease-in-out infinite;
+      }
+
+      @keyframes wave {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(20deg);
+        }
+        75% {
+          transform: rotate(-20deg);
+        }
+      }
+
+      .intro-text {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 40px;
+        color: var(--text-secondary);
+      }
+
+      .highlight {
+        color: var(--neon-cyan);
+        font-weight: bold;
+      }
+
+      /* Contact Methods Grid */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .contact-card {
+        padding: 30px;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .contact-card::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, var(--card-color), transparent);
+        border-radius: 15px;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.3s ease;
+      }
+
+      .contact-card:hover::before {
+        opacity: 0.3;
+      }
+
+      .contact-icon {
+        font-size: 48px;
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--card-color);
+      }
+
+      .contact-title {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 15px;
+        color: var(--card-color);
+      }
+
+      .contact-description {
+        text-align: center;
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+      }
+
+      .contact-info {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 15px;
+        border-radius: 10px;
+        font-family: "Arial", sans-serif;
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 15px;
+        border: 1px solid var(--glass-border);
+      }
+
+      .contact-link {
+        color: var(--card-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .contact-link:hover {
+        text-decoration: underline;
+        text-shadow: 0 0 10px var(--card-color);
+      }
+
+      .contact-btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(45deg, var(--card-color), transparent);
+        color: var(--text-primary);
+        border: 1px solid var(--card-color);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      .contact-btn:hover {
+        background: var(--card-color);
+        box-shadow: 0 0 20px var(--card-color);
+        transform: scale(1.02);
+      }
+
+      /* Contact Cards */
+      .email {
+        --card-color: #00ffff;
+      }
+      .github {
+        --card-color: #0080ff;
+      }
+      .linkedin {
+        --card-color: #9b59b6;
+      }
+      .whatsapp {
+        --card-color: #ff006e;
+      }
+
+      /* Back Button */
+      .back-btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background: linear-gradient(
+          45deg,
+          var(--neon-blue),
+          var(--neon-purple)
+        );
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        margin-bottom: 30px;
+      }
+
+      .back-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px var(--neon-blue);
+      }
+
+      /* Additional Info */
+      .additional-info {
+        text-align: center;
+        padding: 30px;
+        margin-top: 40px;
+        background: linear-gradient(45deg, var(--neon-green), var(--neon-cyan));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 16px;
+      }
+
+      .availability {
+        background: rgba(0, 255, 136, 0.1);
+        border: 1px solid var(--neon-green);
+        padding: 20px;
+        border-radius: 15px;
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .availability h3 {
+        color: var(--neon-green);
+        margin-bottom: 10px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        header {
+          padding: 15px 20px;
+        }
+
+        .nav-links {
+          gap: 15px;
+        }
+
+        main {
+          padding: 100px 10px 60px;
+        }
+
+        .content-container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 36px;
+        }
+
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background Effects -->
+    <div class="background-container">
+      <div class="gradient-bg"></div>
+    </div>
+    <div class="background-overlay"></div>
+
+    <!-- Header -->
+    <header>
+      <nav>
+        <div class="logo">Denis Matejčík</div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="coffee.html">Coffee</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="glass content-container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+
+        <div class="contact-emoji">👋</div>
+        <h1>Contact Me</h1>
+
+        <div class="intro-text">
+          <p>
+            Let's connect!
+            <span class="highlight"
+              >I'm always open to discussing new opportunities, collaborations,
+              or just having a tech chat.</span
+            >
+          </p>
+          <p>Choose your preferred method of communication below. 🚀</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Email -->
+          <div class="contact-card glass email">
+            <div class="contact-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                />
+              </svg>
+            </div>
+            <h3 class="contact-title">Email</h3>
+            <p class="contact-description">
+              For professional inquiries, project discussions, or general
+              questions
+            </p>
+            <div class="contact-info">
+              <a href="mailto:matejcik.denis@gmail.com" class="contact-link"
+                >matejcik.denis@gmail.com</a
+              >
+            </div>
+            <a href="mailto:matejcik.denis@gmail.com" class="contact-btn">
+              📧 Send Email
+            </a>
+          </div>
+
+          <!-- GitHub -->
+          <div class="contact-card glass github">
+            <div class="contact-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+            </div>
+            <h3 class="contact-title">GitHub</h3>
+            <p class="contact-description">
+              Check out my repositories, contribute to projects, or start a
+              discussion
+            </p>
+            <div class="contact-info">
+              <a
+                href="https://github.com/Mild-Solvent"
+                class="contact-link"
+                target="_blank"
+                >github.com/Mild-Solvent</a
+              >
+            </div>
+            <a
+              href="https://github.com/Mild-Solvent"
+              class="contact-btn"
+              target="_blank"
+            >
+              💻 View GitHub Profile
+            </a>
+          </div>
+
+          <!-- LinkedIn -->
+          <div class="contact-card glass linkedin">
+            <div class="contact-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                />
+              </svg>
+            </div>
+            <h3 class="contact-title">LinkedIn</h3>
+            <p class="contact-description">
+              Connect professionally, view my experience, and network
+            </p>
+            <div class="contact-info">
+              <a
+                href="https://www.linkedin.com/in/denis-matejcik/"
+                class="contact-link"
+                target="_blank"
+                >linkedin.com/in/denis-matejcik</a
+              >
+            </div>
+            <a
+              href="https://www.linkedin.com/in/denis-matejcik/"
+              class="contact-btn"
+              target="_blank"
+            >
+              🤝 Connect on LinkedIn
+            </a>
+          </div>
+
+          <!-- WhatsApp -->
+          <div class="contact-card glass whatsapp">
+            <div class="contact-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.905 3.488"
+                />
+              </svg>
+            </div>
+            <h3 class="contact-title">WhatsApp</h3>
+            <p class="contact-description">
+              Quick messages and instant communication for urgent matters
+            </p>
+            <div class="contact-info">
+              <a
+                href="https://wa.me/qr/QCT7GFP2BR2IG1"
+                class="contact-link"
+                target="_blank"
+                >wa.me/qr/QCT7GFP2BR2IG1</a
+              >
+            </div>
+            <a
+              href="https://wa.me/qr/QCT7GFP2BR2IG1"
+              class="contact-btn"
+              target="_blank"
+            >
+              💬 Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="availability glass">
+          <h3>🟢 Availability Status</h3>
+          <p>
+            <span class="highlight">Currently available</span> for freelance
+            projects and collaborations
+          </p>
+          <p style="margin-top: 10px; color: var(--text-secondary)">
+            Typical response time: Within 24 hours<br />
+            Best time to reach me: 9 AM - 6 PM CET
+          </p>
+        </div>
+
+        <div class="additional-info glass">
+          <p>
+            🌍 <strong>Location:</strong> Slovakia, Europe (CET/CEST timezone)
+          </p>
+          <p style="margin-top: 15px">
+            💼 <strong>Services:</strong> Web Development, Game Development,
+            DevOps, Mobile Apps
+          </p>
+          <p style="margin-top: 15px">
+            🎯 <strong>Preferred Contact:</strong> Email for detailed
+            discussions, WhatsApp for quick questions
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Add some interactive particles when hovering contact cards
+      document.querySelectorAll(".contact-card").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          createHoverParticles(this);
+        });
+      });
+
+      function createHoverParticles(element) {
+        const rect = element.getBoundingClientRect();
+        const particleCount = 6;
+
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement("div");
+          particle.style.position = "fixed";
+          particle.style.width = "4px";
+          particle.style.height = "4px";
+          particle.style.background =
+            getComputedStyle(element).getPropertyValue("--card-color");
+          particle.style.borderRadius = "50%";
+          particle.style.pointerEvents = "none";
+          particle.style.zIndex = "9999";
+          particle.style.left = rect.left + Math.random() * rect.width + "px";
+          particle.style.top = rect.top + Math.random() * rect.height + "px";
+          particle.style.transition = "all 1s ease-out";
+          particle.style.opacity = "1";
+
+          document.body.appendChild(particle);
+
+          setTimeout(() => {
+            particle.style.transform = `translate(${
+              (Math.random() - 0.5) * 100
+            }px, ${(Math.random() - 0.5) * 100}px)`;
+            particle.style.opacity = "0";
+          }, 10);
+
+          setTimeout(() => particle.remove(), 1000);
+        }
+      }
+    </script>
+  </body>
+</html>
