@@ -3,7 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Denis Matejčík - Portfolio</title>
+    <title>Denis Matejčík - Full Stack Developer | Portfolio</title>
+    <meta name="description" content="Full Stack Developer specializing in web development, game development, mobile apps, DevOps & cloud infrastructure. React, Next.js, Unreal Engine, and more." />
+    <meta name="keywords" content="Denis Matejčík, Full Stack Developer, Web Development, Game Development, Mobile Apps, DevOps, Cloud Infrastructure, React, Next.js, Unreal Engine" />
+    <meta name="author" content="Denis Matejčík" />
+    <meta property="og:title" content="Denis Matejčík - Full Stack Developer Portfolio" />
+    <meta property="og:description" content="Explore my portfolio showcasing web development, game development, mobile apps, and DevOps projects." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mild-solvent.github.io/portfolio/" />
+    <link rel="canonical" href="https://mild-solvent.github.io/portfolio/" />
     <style>
       * {
         margin: 0;
@@ -21,14 +29,21 @@
         --glass-border: rgba(255, 255, 255, 0.1);
         --text-primary: #ffffff;
         --text-secondary: #b0b0b0;
+        --section-padding: 120px 50px 80px;
+        --mobile-section-padding: 100px 20px 60px;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
-        font-family: "Arial", sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         background: #000000;
         color: var(--text-primary);
         overflow-x: hidden;
         position: relative;
+        line-height: 1.6;
       }
 
       /* Animated Background */
@@ -119,6 +134,7 @@
           inset 0 0 20px rgba(255, 255, 255, 0.05);
         position: relative;
         overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .glass::before {
@@ -138,12 +154,11 @@
         border-radius: 15px;
         opacity: 0;
         z-index: -1;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .glass:hover::before {
-        opacity: 0.3;
-        animation: shimmer 2s ease-in-out infinite;
+        opacity: 0.2;
       }
 
       @keyframes shimmer {
@@ -162,12 +177,10 @@
         width: 100%;
         padding: 20px 50px;
         z-index: 1000;
-        transition: all 0.3s ease;
-      }
-
-      header.glass {
+        background: rgba(0, 0, 0, 0.8);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--glass-border);
       }
 
       nav {
@@ -208,29 +221,33 @@
         color: var(--text-primary);
         text-decoration: none;
         position: relative;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         padding: 10px 20px;
         border-radius: 25px;
       }
 
       .nav-links a:hover {
-        background: var(--glass-bg);
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        background: rgba(0, 212, 255, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
       }
 
       /* Sections */
       section {
         min-height: 100vh;
-        padding: 120px 50px 80px;
+        padding: var(--section-padding);
         position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
       }
 
       .section-title {
-        font-size: 48px;
+        font-size: clamp(36px, 5vw, 48px);
         margin-bottom: 50px;
         text-align: center;
         background: linear-gradient(
@@ -240,7 +257,9 @@
         );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: float 3s ease-in-out infinite;
+        background-clip: text;
+        font-weight: 700;
+        letter-spacing: -0.02em;
       }
 
       @keyframes float {
@@ -263,9 +282,9 @@
       }
 
       .web-card {
-        aspect-ratio: 1;
+        aspect-ratio: 16 / 9;
         cursor: pointer;
-        transition: all 0.5s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
       }
@@ -274,12 +293,16 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: all 0.5s ease;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .web-card:hover {
-        transform: translateY(-10px) scale(1.05);
+        transform: translateY(-8px);
         box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+      }
+
+      .web-card:hover img {
+        transform: scale(1.05);
       }
 
       .web-card-content {
@@ -288,13 +311,25 @@
         left: 0;
         right: 0;
         padding: 20px;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%);
         transform: translateY(100%);
-        transition: transform 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .web-card:hover .web-card-content {
         transform: translateY(0);
+      }
+
+      .web-card-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+        color: var(--neon-cyan);
+      }
+
+      .web-card-content p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        opacity: 0.9;
       }
 
       /* Game Development Section */
@@ -304,8 +339,22 @@
       }
 
       .game-item {
-        margin-bottom: 50px;
-        padding: 30px;
+        margin-bottom: 60px;
+        padding: 40px;
+      }
+
+      .game-item h3 {
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+        color: var(--neon-cyan);
+      }
+
+      .game-item p {
+        margin-top: 20px;
+        margin-bottom: 25px;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: var(--text-secondary);
       }
 
       .carousel {
@@ -364,31 +413,59 @@
         display: inline-block;
         padding: 15px 40px;
         background: linear-gradient(
-          45deg,
+          135deg,
           var(--neon-blue),
           var(--neon-purple)
         );
         color: white;
         text-decoration: none;
         border-radius: 30px;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .download-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
       }
 
       .download-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 30px var(--neon-blue);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+      }
+
+      .download-btn:hover::before {
+        left: 100%;
       }
 
       /* Mobile App Section */
       .app-showcase {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 50px;
+        gap: 60px;
         align-items: center;
         width: 100%;
         max-width: 1200px;
+      }
+
+      .app-showcase h3 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: var(--neon-cyan);
       }
 
       /* DevOps Section */
@@ -414,13 +491,24 @@
         height: 150px;
         padding: 20px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
-        animation: float-physics 6s ease-in-out infinite;
+        animation: float-physics 8s ease-in-out infinite;
+      }
+
+      .floating-square h4 {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      .floating-square p {
+        font-size: 0.85rem;
+        opacity: 0.8;
       }
 
       @keyframes float-physics {
@@ -429,13 +517,13 @@
           transform: translateY(0) rotate(0deg);
         }
         25% {
-          transform: translateY(-20px) rotate(5deg);
+          transform: translateY(-15px) rotate(2deg);
         }
         50% {
-          transform: translateY(0) rotate(-5deg);
+          transform: translateY(0) rotate(-2deg);
         }
         75% {
-          transform: translateY(-10px) rotate(3deg);
+          transform: translateY(-8px) rotate(1deg);
         }
       }
 
@@ -502,20 +590,32 @@
       }
 
       .floating-square:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 40px var(--neon-green);
+        transform: scale(1.08) translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 255, 136, 0.3);
       }
 
       .tech-card {
-        padding: 30px;
+        padding: 35px 30px;
         text-align: center;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
       }
 
       .tech-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+      }
+
+      .tech-card h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: var(--neon-green);
+      }
+
+      .tech-card p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
       }
 
       .tech-icon {
@@ -731,30 +831,46 @@
       }
 
       /* Responsive Design */
+      @media (max-width: 1024px) {
+        section {
+          padding: 100px 40px 60px;
+        }
+      }
+
       @media (max-width: 768px) {
         header {
           padding: 15px 20px;
+        }
+
+        .logo {
+          font-size: 24px;
         }
 
         .nav-links {
           gap: 15px;
         }
 
+        .nav-links a {
+          padding: 8px 16px;
+          font-size: 0.9rem;
+        }
+
         section {
-          padding: 80px 20px 50px;
+          padding: var(--mobile-section-padding);
         }
 
         .section-title {
-          font-size: 36px;
+          margin-bottom: 40px;
         }
 
         .web-grid {
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 20px;
+          grid-template-columns: 1fr;
+          gap: 25px;
         }
 
         .app-showcase {
           grid-template-columns: 1fr;
+          gap: 40px;
         }
 
         .devops-container {
@@ -762,15 +878,48 @@
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           gap: 20px;
+          padding: 20px;
         }
 
         .floating-square {
           position: relative;
           animation: none;
+          width: 100%;
+          height: auto;
+          aspect-ratio: 1;
         }
 
         .cyber-grid {
-          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .game-item {
+          padding: 30px 20px;
+        }
+
+        .carousel {
+          height: 250px;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .social-links {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .devops-container {
+          grid-template-columns: 1fr;
+        }
+
+        .tech-card {
+          padding: 25px 20px;
         }
       }
 
@@ -1471,17 +1620,9 @@
         revealOnScroll(); // Check on load
       }
 
-      // Header Glass Effect on Scroll
+      // Header is now always styled, no scroll effect needed
       function initHeaderEffect() {
-        const header = document.querySelector("header");
-
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 50) {
-            header.classList.add("glass");
-          } else {
-            header.classList.remove("glass");
-          }
-        });
+        // Header maintains consistent styling
       }
 
       // Smooth Scrolling
