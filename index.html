@@ -11,6 +11,16 @@
     <meta property="og:description" content="Explore my portfolio showcasing web development, game development, mobile apps, and DevOps projects." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mild-solvent.github.io/portfolio/" />
+    <meta property="og:image" content="https://mild-solvent.github.io/portfolio/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Denis Matejčík - Full Stack Developer Portfolio" />
+    <meta name="twitter:description" content="Explore my portfolio showcasing web development, game development, mobile apps, and DevOps projects." />
+    <meta name="twitter:image" content="https://mild-solvent.github.io/portfolio/images/og-image.jpg" />
+    
     <link rel="canonical" href="https://mild-solvent.github.io/portfolio/" />
     <style>
       * {
@@ -192,6 +202,11 @@
       .logo {
         font-size: 28px;
         font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .logo-text {
         background: linear-gradient(
           45deg,
           var(--neon-blue),
@@ -199,6 +214,7 @@
         );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-clip: text;
         animation: glow 2s ease-in-out infinite alternate;
       }
 
@@ -235,7 +251,7 @@
       /* Sections */
       section {
         min-height: 100vh;
-        padding: var(--section-padding);
+        padding: 100px 50px 80px;
         position: relative;
         display: flex;
         flex-direction: column;
@@ -244,6 +260,10 @@
         max-width: 1400px;
         margin: 0 auto;
         width: 100%;
+      }
+
+      section:first-of-type {
+        padding-top: 120px;
       }
 
       .section-title {
@@ -487,8 +507,8 @@
 
       .floating-square {
         position: absolute;
-        width: 150px;
-        height: 150px;
+        width: 180px;
+        height: 180px;
         padding: 20px;
         cursor: pointer;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -501,14 +521,16 @@
       }
 
       .floating-square h4 {
-        font-size: 1rem;
-        margin-top: 10px;
-        margin-bottom: 5px;
+        font-size: 0.95rem;
+        margin-top: 8px;
+        margin-bottom: 4px;
+        line-height: 1.2;
       }
 
       .floating-square p {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
         opacity: 0.8;
+        line-height: 1.3;
       }
 
       @keyframes float-physics {
@@ -856,7 +878,11 @@
         }
 
         section {
-          padding: var(--mobile-section-padding);
+          padding: 80px 20px 50px;
+        }
+
+        section:first-of-type {
+          padding-top: 100px;
         }
 
         .section-title {
@@ -1021,7 +1047,9 @@
     <!-- Header -->
     <header class="glass">
       <nav>
-        <div class="logo">Denis Matejčík</div>
+        <a href="index.html" class="logo">
+          <span class="logo-text">Denis Matejčík</span>
+        </a>
         <ul class="nav-links">
           <li><a href="contact.html">Contact Me</a></li>
         </ul>

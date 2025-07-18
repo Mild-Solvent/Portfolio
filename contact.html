@@ -136,6 +136,11 @@
       .logo {
         font-size: 28px;
         font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .logo-text {
         background: linear-gradient(
           45deg,
           var(--neon-blue),
@@ -427,7 +432,9 @@
     <!-- Header -->
     <header>
       <nav>
-        <div class="logo">Denis Matejčík</div>
+        <a href="index.html" class="logo">
+          <span class="logo-text">Denis Matejčík</span>
+        </a>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="coffee.html">Coffee</a></li>
