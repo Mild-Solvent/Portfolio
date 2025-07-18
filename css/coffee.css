@@ -1,0 +1,381 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --neon-blue: #00d4ff;
+  --neon-purple: #9b59b6;
+  --neon-pink: #ff006e;
+  --neon-green: #00ff88;
+  --neon-cyan: #00ffff;
+  --neon-orange: #ff9800;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background: #000000;
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Background Effects */
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  overflow: hidden;
+}
+
+.gradient-bg {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+      circle at 20% 50%,
+      var(--neon-blue) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      var(--neon-purple) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 20%,
+      var(--neon-pink) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 60% 60%,
+      var(--neon-orange) 0%,
+      transparent 50%
+    );
+  animation: gradientShift 60s ease-in-out infinite;
+  opacity: 0.1;
+}
+
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: -2;
+  pointer-events: none;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-20%, 10%) rotate(180deg);
+  }
+}
+
+/* Glass Effect */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 50px;
+  z-index: 1000;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(
+    45deg,
+    var(--neon-blue),
+    var(--neon-purple)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+
+.nav-links a:hover {
+  background: var(--glass-bg);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+/* Main Content */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 20px 80px;
+}
+
+.content-container {
+  padding: 40px;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-align: center;
+  background: linear-gradient(
+    45deg,
+    var(--neon-orange),
+    var(--neon-pink)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.coffee-emoji {
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.intro-text {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: var(--text-secondary);
+}
+
+.highlight {
+  color: var(--neon-cyan);
+  font-weight: bold;
+}
+
+/* Payment Options Grid */
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.payment-card {
+  padding: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.payment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.payment-card::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--card-color), transparent);
+  border-radius: 15px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.payment-card:hover::before {
+  opacity: 0.3;
+}
+
+.payment-icon {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--card-color);
+}
+
+.payment-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+  color: var(--card-color);
+}
+
+.payment-description {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.payment-address {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 10px;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  word-break: break-all;
+  margin-bottom: 15px;
+  border: 1px solid var(--glass-border);
+}
+
+.copy-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(45deg, var(--card-color), transparent);
+  color: var(--text-primary);
+  border: 1px solid var(--card-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.copy-btn:hover {
+  background: var(--card-color);
+  box-shadow: 0 0 20px var(--card-color);
+  transform: scale(1.02);
+}
+
+/* Crypto Cards */
+.solana {
+  --card-color: #9945ff;
+}
+.ethereum {
+  --card-color: #627eea;
+}
+.revolut {
+  --card-color: #0075eb;
+}
+.paypal {
+  --card-color: #0070ba;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: linear-gradient(
+    45deg,
+    var(--neon-blue),
+    var(--neon-purple)
+  );
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px var(--neon-blue);
+}
+
+/* Thank You Message */
+.thank-you {
+  text-align: center;
+  padding: 30px;
+  margin-top: 40px;
+  background: linear-gradient(45deg, var(--neon-green), var(--neon-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* QR Code Placeholder */
+.qr-placeholder {
+  width: 120px;
+  height: 120px;
+  background: var(--glass-bg);
+  border: 2px dashed var(--glass-border);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  main {
+    padding: 100px 10px 60px;
+  }
+
+  .content-container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .payment-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
