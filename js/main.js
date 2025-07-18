@@ -1,14 +1,65 @@
-// Particle System
+// Custom Cursor
+function initCursor() {
+  const cursor = document.createElement('div');
+  const cursorDot = document.createElement('div');
+  cursor.className = 'cursor';
+  cursorDot.className = 'cursor-dot';
+  
+  document.body.appendChild(cursor);
+  document.body.appendChild(cursorDot);
+  
+  let mouseX = 0;
+  let mouseY = 0;
+  let cursorX = 0;
+  let cursorY = 0;
+  
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+  
+  function animateCursor() {
+    const distX = mouseX - cursorX;
+    const distY = mouseY - cursorY;
+    
+    cursorX += distX * 0.1;
+    cursorY += distY * 0.1;
+    
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+    
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+    
+    requestAnimationFrame(animateCursor);
+  }
+  
+  animateCursor();
+  
+  // Add hover effect
+  const hoverElements = document.querySelectorAll('a, button, .glass, .web-card, .tech-card, .floating-square');
+  hoverElements.forEach(element => {
+    element.addEventListener('mouseenter', () => cursor.classList.add('active'));
+    element.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+  });
+}
+
+// Enhanced Particle System
 function createParticles() {
   const particlesContainer = document.getElementById("particles");
-  const particleCount = 20;
+  const particleCount = 30;
 
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement("div");
     particle.className = "particle";
     particle.style.left = Math.random() * 100 + "%";
     particle.style.animationDelay = Math.random() * 10 + "s";
-    particle.style.animationDuration = Math.random() * 10 + 10 + "s";
+    particle.style.animationDuration = Math.random() * 15 + 10 + "s";
+    
+    // Random size
+    const size = Math.random() * 6 + 2;
+    particle.style.width = size + "px";
+    particle.style.height = size + "px";
 
     const colors = [
       "var(--neon-blue)",
@@ -19,6 +70,7 @@ function createParticles() {
     ];
     particle.style.background =
       colors[Math.floor(Math.random() * colors.length)];
+    particle.style.boxShadow = `0 0 ${size * 2}px ${particle.style.background}`;
 
     particlesContainer.appendChild(particle);
   }
@@ -225,8 +277,25 @@ function checkCookieConsent() {
   }
 }
 
+// Create Cyberpunk Grid Background
+function createCyberGrid() {
+  const gridBg = document.createElement('div');
+  gridBg.className = 'cyber-grid-bg';
+  document.body.appendChild(gridBg);
+}
+
+// Add glitch effect to titles
+function initGlitchEffect() {
+  const titles = document.querySelectorAll('.section-title');
+  titles.forEach(title => {
+    title.setAttribute('data-text', title.textContent);
+  });
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
+  initCursor();
+  createCyberGrid();
   createParticles();
   initParallax();
   initImageHovers();
@@ -235,6 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
   addHoverParticles();
   autoRotateCarousels();
   checkCookieConsent();
+  initGlitchEffect();
 
   // Add loading animation
   document.body.style.opacity = "0";

@@ -5,16 +5,25 @@
 }
 
 :root {
-  --neon-blue: #00d4ff;
-  --neon-purple: #9b59b6;
-  --neon-pink: #ff006e;
-  --neon-green: #00ff88;
+  /* Cyberpunk Color Palette */
+  --neon-blue: #00d9ff;
+  --neon-purple: #bd00ff;
+  --neon-pink: #ff0080;
+  --neon-green: #00ff41;
   --neon-cyan: #00ffff;
-  --neon-orange: #ff9800;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --neon-yellow: #ffff00;
+  --neon-orange: #ff6600;
+  --neon-red: #ff0040;
+  
+  /* Enhanced Glass Effects */
+  --glass-bg: rgba(0, 20, 40, 0.4);
+  --glass-border: rgba(0, 255, 255, 0.3);
+  --glass-shadow: rgba(0, 255, 255, 0.2);
+  
+  /* Text Colors */
   --text-primary: #ffffff;
-  --text-secondary: #b0b0b0;
+  --text-secondary: #a0c4ff;
+  --text-glow: #00ffff;
 }
 
 body {
