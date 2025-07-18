@@ -14,21 +14,21 @@
   --neon-yellow: #ffff00;
   --neon-orange: #ff6600;
   --neon-red: #ff0040;
-  
+
   /* Enhanced Glass Effects */
   --glass-bg: rgba(0, 20, 40, 0.4);
   --glass-border: rgba(0, 255, 255, 0.3);
   --glass-shadow: rgba(0, 255, 255, 0.2);
-  
+
   /* Text Colors */
   --text-primary: #ffffff;
   --text-secondary: #a0c4ff;
   --text-glow: #00ffff;
-  
+
   /* Grid Colors */
   --grid-color: rgba(0, 255, 255, 0.1);
   --grid-glow: rgba(0, 255, 255, 0.4);
-  
+
   /* Spacing */
   --section-padding: 120px 50px 80px;
   --mobile-section-padding: 100px 20px 60px;
@@ -39,48 +39,19 @@ html {
 }
 
 body {
-  font-family: 'Orbitron', 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: "Orbitron", "Rajdhani", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
   background: #000000;
   color: var(--text-primary);
   overflow-x: hidden;
   position: relative;
   line-height: 1.6;
-  cursor: none;
 }
 
 /* Import futuristic fonts */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap");
 
-/* Custom Cursor */
-.cursor {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--neon-cyan);
-  border-radius: 50%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  transition: all 0.1s ease;
-  z-index: 10000;
-  mix-blend-mode: difference;
-}
-
-.cursor-dot {
-  width: 5px;
-  height: 5px;
-  background: var(--neon-cyan);
-  border-radius: 50%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 10001;
-}
-
-.cursor.active {
-  transform: translate(-50%, -50%) scale(1.5);
-  border-color: var(--neon-pink);
-  box-shadow: 0 0 20px var(--neon-pink);
-}
+/* Mouse Trail Particles will be handled in JS */
 
 /* Animated Background */
 .background-container {
@@ -101,8 +72,7 @@ body {
   width: 100%;
   height: 100%;
   z-index: -3;
-  background-image: 
-    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+  background-image: linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
   animation: grid-move 20s linear infinite;
@@ -128,21 +98,9 @@ body {
       var(--neon-blue) 0%,
       transparent 50%
     ),
-    radial-gradient(
-      circle at 80% 80%,
-      var(--neon-purple) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 40% 20%,
-      var(--neon-pink) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 10%,
-      var(--neon-green) 0%,
-      transparent 50%
-    );
+    radial-gradient(circle at 80% 80%, var(--neon-purple) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, var(--neon-pink) 0%, transparent 50%),
+    radial-gradient(circle at 80% 10%, var(--neon-green) 0%, transparent 50%);
   animation: gradientShift 60s ease-in-out infinite;
   opacity: 0.15;
 }
@@ -187,13 +145,16 @@ body {
 
 /* Enhanced Glass Effect with Holographic Shimmer */
 .glass {
-  background: linear-gradient(135deg, rgba(0, 20, 40, 0.6), rgba(0, 40, 80, 0.3));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 20, 40, 0.6),
+    rgba(0, 40, 80, 0.3)
+  );
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
   border: 1px solid var(--glass-border);
   border-radius: 20px;
-  box-shadow: 
-    0 8px 32px 0 rgba(0, 255, 255, 0.2),
+  box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.2),
     inset 0 0 20px rgba(255, 255, 255, 0.05),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   position: relative;
@@ -259,10 +220,8 @@ body {
 
 .glass:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 12px 40px 0 rgba(0, 255, 255, 0.3),
-    inset 0 0 30px rgba(255, 255, 255, 0.1),
-    0 0 0 1px rgba(0, 255, 255, 0.5);
+  box-shadow: 0 12px 40px 0 rgba(0, 255, 255, 0.3),
+    inset 0 0 30px rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(0, 255, 255, 0.5);
 }
 
 .glass:hover::before {
@@ -310,11 +269,7 @@ nav {
 }
 
 .logo-text {
-  background: linear-gradient(
-    45deg,
-    var(--neon-blue),
-    var(--neon-purple)
-  );
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -413,17 +368,12 @@ section {
   margin: 0 auto;
   width: 100%;
 }
-}
 
 .section-title {
   font-size: clamp(36px, 5vw, 48px);
   margin-bottom: 50px;
   text-align: center;
-  background: linear-gradient(
-    45deg,
-    var(--neon-cyan),
-    var(--neon-purple)
-  );
+  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -433,84 +383,12 @@ section {
   display: inline-block;
   width: 100%;
   text-transform: uppercase;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
-/* Glitch effect for titles */
-.section-title::before,
-.section-title::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    45deg,
-    var(--neon-cyan),
-    var(--neon-purple)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.section-title::before {
-  animation: glitch-1 0.5s infinite;
-  color: var(--neon-blue);
-  z-index: -1;
-}
-
-.section-title::after {
-  animation: glitch-2 0.5s infinite;
-  color: var(--neon-pink);
-  z-index: -2;
-}
-
-@keyframes glitch-1 {
-  0%, 100% {
-    clip: rect(0, 900px, 0, 0);
-    transform: translate(0);
-  }
-  20% {
-    clip: rect(20px, 900px, 40px, 0);
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    clip: rect(40px, 900px, 60px, 0);
-    transform: translate(2px, -2px);
-  }
-  60% {
-    clip: rect(60px, 900px, 80px, 0);
-    transform: translate(-2px, 2px);
-  }
-  80% {
-    clip: rect(80px, 900px, 100px, 0);
-    transform: translate(2px, -2px);
-  }
-}
-
-@keyframes glitch-2 {
-  0%, 100% {
-    clip: rect(0, 900px, 0, 0);
-    transform: translate(0);
-  }
-  20% {
-    clip: rect(20px, 900px, 40px, 0);
-    transform: translate(2px, -2px);
-  }
-  40% {
-    clip: rect(40px, 900px, 60px, 0);
-    transform: translate(-2px, 2px);
-  }
-  60% {
-    clip: rect(60px, 900px, 80px, 0);
-    transform: translate(2px, -2px);
-  }
-  80% {
-    clip: rect(80px, 900px, 100px, 0);
-    transform: translate(-2px, 2px);
-  }
+/* Subtle hover glow effect for titles */
+.section-title:hover {
+  text-shadow: 0 0 30px var(--neon-cyan), 0 0 60px var(--neon-purple);
 }
 
 @keyframes float {
@@ -562,7 +440,12 @@ section {
   left: 0;
   right: 0;
   padding: 20px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%);
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.7) 60%,
+    transparent 100%
+  );
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -663,11 +546,7 @@ section {
 .download-btn {
   display: inline-block;
   padding: 15px 40px;
-  background: linear-gradient(
-    135deg,
-    var(--neon-blue),
-    var(--neon-purple)
-  );
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
   color: white;
   text-decoration: none;
   border-radius: 30px;
@@ -679,7 +558,7 @@ section {
 }
 
 .download-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -874,9 +753,10 @@ section {
 .tech-icon {
   font-size: 48px;
   margin-bottom: 15px;
-  background: linear-gradient(45deg, var(--neon-green), var(--neon-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji",
+    sans-serif;
+  filter: drop-shadow(0 0 20px var(--neon-cyan));
 }
 
 /* Footer */
@@ -1232,11 +1112,7 @@ footer {
 }
 
 .cookie-btn.accept {
-  background: linear-gradient(
-    45deg,
-    var(--neon-blue),
-    var(--neon-purple)
-  );
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
   color: white;
 }
 

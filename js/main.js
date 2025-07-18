@@ -1,47 +1,46 @@
-// Custom Cursor
-function initCursor() {
-  const cursor = document.createElement('div');
-  const cursorDot = document.createElement('div');
-  cursor.className = 'cursor';
-  cursorDot.className = 'cursor-dot';
-  
-  document.body.appendChild(cursor);
-  document.body.appendChild(cursorDot);
-  
+// Mouse Trail Particles
+function initMouseTrail() {
   let mouseX = 0;
   let mouseY = 0;
-  let cursorX = 0;
-  let cursorY = 0;
+  let trailDelay = 0;
   
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
+    
+    // Create trail particles with delay
+    trailDelay++;
+    if (trailDelay % 3 === 0) { // Create particle every 3rd mouse move
+      createTrailParticle(mouseX, mouseY);
+    }
   });
+}
+
+function createTrailParticle(x, y) {
+  const particle = document.createElement('div');
+  particle.style.position = 'fixed';
+  particle.style.width = '4px';
+  particle.style.height = '4px';
+  particle.style.background = 'var(--neon-cyan)';
+  particle.style.borderRadius = '50%';
+  particle.style.pointerEvents = 'none';
+  particle.style.zIndex = '9999';
+  particle.style.left = x + 'px';
+  particle.style.top = y + 'px';
+  particle.style.boxShadow = '0 0 6px var(--neon-cyan)';
+  particle.style.transition = 'all 1s ease-out';
+  particle.style.opacity = '0.8';
   
-  function animateCursor() {
-    const distX = mouseX - cursorX;
-    const distY = mouseY - cursorY;
-    
-    cursorX += distX * 0.1;
-    cursorY += distY * 0.1;
-    
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top = cursorY + 'px';
-    
-    cursorDot.style.left = mouseX + 'px';
-    cursorDot.style.top = mouseY + 'px';
-    
-    requestAnimationFrame(animateCursor);
-  }
+  document.body.appendChild(particle);
   
-  animateCursor();
+  // Animate particle
+  setTimeout(() => {
+    particle.style.transform = `translate(${(Math.random() - 0.5) * 30}px, ${(Math.random() - 0.5) * 30}px) scale(0)`;
+    particle.style.opacity = '0';
+  }, 10);
   
-  // Add hover effect
-  const hoverElements = document.querySelectorAll('a, button, .glass, .web-card, .tech-card, .floating-square');
-  hoverElements.forEach(element => {
-    element.addEventListener('mouseenter', () => cursor.classList.add('active'));
-    element.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-  });
+  // Remove particle after animation
+  setTimeout(() => particle.remove(), 1000);
 }
 
 // Enhanced Particle System
@@ -284,17 +283,17 @@ function createCyberGrid() {
   document.body.appendChild(gridBg);
 }
 
-// Add glitch effect to titles
-function initGlitchEffect() {
-  const titles = document.querySelectorAll('.section-title');
-  titles.forEach(title => {
-    title.setAttribute('data-text', title.textContent);
+// Initialize section animations
+function initSectionAnimations() {
+  const sections = document.querySelectorAll('section');
+  sections.forEach(section => {
+    section.classList.add('scroll-reveal');
   });
 }
 
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  initCursor();
+  initMouseTrail();
   createCyberGrid();
   createParticles();
   initParallax();
@@ -304,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
   addHoverParticles();
   autoRotateCarousels();
   checkCookieConsent();
-  initGlitchEffect();
+  initSectionAnimations();
 
   // Add loading animation
   document.body.style.opacity = "0";
