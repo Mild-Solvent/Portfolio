@@ -114,6 +114,9 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
+    <!-- Skip to main content for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Background Effects -->
     <div class="background-container">
       <div class="gradient-bg"></div>
@@ -134,9 +137,11 @@
       </nav>
     </header>
 
-    <!-- Web Development Section -->
-    <section id="web-dev" class="scroll-reveal">
-      <h2 class="section-title">Web Development</h2>
+    <!-- Main Content -->
+    <main id="main-content">
+      <!-- Web Development Section -->
+      <section id="web-dev" class="scroll-reveal" aria-labelledby="web-dev-title">
+        <h2 id="web-dev-title" class="section-title text-gradient">Web Development</h2>
       <div class="web-grid">
         <div
           class="web-card glass"
@@ -207,16 +212,16 @@
       </div>
     </section>
 
-    <!-- Game Development Section -->
-    <section id="game-dev" class="scroll-reveal">
-      <h2 class="section-title">Game Development</h2>
+      <!-- Game Development Section -->
+      <section id="game-dev" class="scroll-reveal" aria-labelledby="game-dev-title">
+        <h2 id="game-dev-title" class="section-title text-gradient">Game Development</h2>
       <div class="game-container">
         <div class="game-item glass">
           <h3>Unreal Engine 5: Experiment Echo</h3>
-          <div class="carousel">
-            <div class="carousel-track" data-carousel="0">
-              <div class="carousel-slide">
-                <img src="images/game1-1.png" alt="Game Screenshot 1" loading="lazy" />
+          <div class="carousel" role="region" aria-label="Game screenshots carousel">
+            <div class="carousel-track" data-carousel="0" role="list">
+              <div class="carousel-slide" role="listitem">
+                <img src="images/game1-1.png" alt="Experiment Echo game screenshot showing environment" loading="lazy" />
               </div>
               <div class="carousel-slide">
                 <img src="images/game1-2.png" alt="Game Screenshot 2" loading="lazy" />
@@ -256,10 +261,18 @@
               </div>
             </div>
             <div class="carousel-controls">
-              <button class="carousel-btn" onclick="moveCarousel(0, -1)">
+              <button 
+                class="carousel-btn" 
+                onclick="moveCarousel(0, -1)"
+                aria-label="Previous game screenshot"
+                type="button">
                 ❮
               </button>
-              <button class="carousel-btn" onclick="moveCarousel(0, 1)">
+              <button 
+                class="carousel-btn" 
+                onclick="moveCarousel(0, 1)"
+                aria-label="Next game screenshot"
+                type="button">
                 ❯
               </button>
             </div>
@@ -352,9 +365,9 @@
       </div>
     </section>
 
-    <!-- Mobile App Development Section -->
-    <section id="mobile-dev" class="scroll-reveal">
-      <h2 class="section-title">Mobile App Development</h2>
+      <!-- Mobile App Development Section -->
+      <section id="mobile-dev" class="scroll-reveal" aria-labelledby="mobile-dev-title">
+        <h2 id="mobile-dev-title" class="section-title text-gradient">Mobile App Development</h2>
       <div class="app-showcase">
         <div class="glass" style="padding: 30px">
           <h3>Cross-Platform Excellence</h3>
@@ -436,9 +449,9 @@
       </div>
     </section>
 
-    <!-- DevOps & Cybersecurity Section -->
-    <section id="devops-cyber" class="scroll-reveal">
-      <h2 class="section-title">DevOps & Cloud Infrastructure / Cybersecurity</h2>
+      <!-- DevOps & Cybersecurity Section -->
+      <section id="devops-cyber" class="scroll-reveal" aria-labelledby="devops-cyber-title">
+        <h2 id="devops-cyber-title" class="section-title text-gradient">DevOps & Cloud Infrastructure / Cybersecurity</h2>
       <div class="tech-lists-container">
         <!-- DevOps Column -->
         <div class="tech-column">
@@ -566,7 +579,8 @@
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </main>
 
     <!-- Footer -->
     <footer id="contact">
