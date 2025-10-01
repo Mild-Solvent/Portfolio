@@ -179,24 +179,6 @@ body {
   color: var(--text-primary);
 }
 
-/* Skip Link for Screen readers */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: var(--neon-cyan);
-  color: var(--bg-primary);
-  padding: var(--space-xs) var(--space-sm);
-  text-decoration: none;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  z-index: var(--z-tooltip);
-  transition: top var(--duration-normal) var(--ease-out);
-}
-
-.skip-link:focus {
-  top: 6px;
-}
 
 /* ==========================================================================
    Background Effects

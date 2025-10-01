@@ -79,24 +79,8 @@ nav {
   overflow: hidden;
 }
 
-.nav-links a::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-  transition: left var(--duration-slow) var(--ease-out);
-}
-
-.nav-links a:hover::before {
-  left: 100%;
-}
-
 .nav-links a:hover {
   background: rgba(0, 212, 255, 0.1);
-  transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
   color: var(--neon-cyan);
 }

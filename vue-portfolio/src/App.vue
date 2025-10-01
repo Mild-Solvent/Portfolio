@@ -42,9 +42,6 @@ onMounted(() => {
 
 <template>
   <div id="app">
-    <!-- Skip to main content for screen readers -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    
     <!-- Background Effects -->
     <div class="background-container">
       <div class="gradient-bg"></div>
