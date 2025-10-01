@@ -65,8 +65,11 @@
   /* Layout System */
   --container-max-width: 1400px;
   --content-max-width: 1200px;
+  --content-max-width-wide: 1000px;
+  --content-max-width-ultra-wide: 1100px;
   --section-padding-y: clamp(4rem, 8vw, 8rem);
   --section-padding-x: clamp(1rem, 4vw, 3rem);
+  --section-gap: clamp(2rem, 4vw, 4rem);
   
   /* Border Radius System */
   --radius-sm: 8px;
@@ -101,16 +104,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap");
 
 :root {
-  /* Typography Scale */
-  --font-size-xs: clamp(0.75rem, 0.8vw, 0.875rem);
-  --font-size-sm: clamp(0.875rem, 1vw, 1rem);
-  --font-size-base: clamp(1rem, 1.2vw, 1.125rem);
-  --font-size-lg: clamp(1.125rem, 1.4vw, 1.25rem);
-  --font-size-xl: clamp(1.25rem, 1.6vw, 1.5rem);
-  --font-size-2xl: clamp(1.5rem, 2vw, 1.875rem);
-  --font-size-3xl: clamp(1.875rem, 2.5vw, 2.25rem);
-  --font-size-4xl: clamp(2.25rem, 3vw, 3rem);
-  --font-size-5xl: clamp(3rem, 4vw, 4rem);
+  /* Typography Scale - Improved for readability */
+  --font-size-xs: clamp(0.8rem, 0.9vw, 0.875rem);
+  --font-size-sm: clamp(0.9rem, 1vw, 1rem);
+  --font-size-base: clamp(1rem, 1.1vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 1.3vw, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 1.5vw, 1.5rem);
+  --font-size-2xl: clamp(1.5rem, 1.8vw, 1.875rem);
+  --font-size-3xl: clamp(1.875rem, 2.2vw, 2.25rem);
+  --font-size-4xl: clamp(2rem, 2.8vw, 3rem);
+  --font-size-5xl: clamp(2.5rem, 3.5vw, 4rem);
   
   /* Font Families */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -163,9 +166,36 @@ body {
 
 /* Improved Focus Styles for Accessibility */
 *:focus-visible {
-  outline: 2px solid var(--neon-cyan);
-  outline-offset: 2px;
+  outline: 3px solid var(--neon-cyan);
+  outline-offset: 3px;
   border-radius: var(--radius-sm);
+}
+
+/* Ensure focus styles are visible on interactive elements */
+.web-card:focus-visible,
+.tech-list-item:focus-visible,
+.carousel-btn:focus-visible {
+  outline: 3px solid var(--neon-cyan);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --text-secondary: rgba(255, 255, 255, 0.9);
+  }
+  
+  .glass {
+    border-width: 2px;
+  }
+  
+  .text-gradient {
+    background: var(--neon-cyan);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 /* Better selection styles */
@@ -527,6 +557,10 @@ nav {
   max-width: var(--container-max-width);
   margin-inline: auto;
   padding-inline: var(--section-padding-x);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xl);
 }
 
 .container-content {
@@ -539,13 +573,6 @@ nav {
 section {
   position: relative;
   padding-block: var(--section-padding-y);
-  padding-inline: var(--section-padding-x);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2xl);
-  max-width: var(--container-max-width);
-  margin-inline: auto;
   width: 100%;
   isolation: isolate;
 }
@@ -1452,8 +1479,9 @@ footer {
   }
   
   /* Layout Adjustments */
-  section {
+  .container {
     gap: var(--space-xl);
+    padding-inline: var(--section-padding-x);
   }
   
   .web-grid {
@@ -1653,5 +1681,160 @@ footer {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   Wide Screen Optimizations (1440px+)
+   ========================================================================== */
+
+/* Large Desktop Screens */
+@media (min-width: 1440px) {
+  :root {
+    --section-padding-y: clamp(3rem, 5vw, 6rem);
+    --section-gap: clamp(2rem, 3vw, 3rem);
+  }
+  
+  /* More compact sections on wide screens */
+  .container {
+    gap: var(--section-gap);
+    max-width: 1300px;
+  }
+  
+  /* Better grid density for web projects */
+  .web-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 2vw, 2rem);
+    max-width: var(--content-max-width-wide);
+  }
+  
+  /* More compact app showcase */
+  .app-showcase {
+    max-width: var(--content-max-width-wide);
+    gap: clamp(3rem, 4vw, 4rem);
+  }
+  
+  /* Tighter tech lists */
+  .tech-lists-container {
+    max-width: var(--content-max-width-wide);
+    gap: clamp(2rem, 3vw, 3rem);
+  }
+  
+  .tech-list {
+    gap: clamp(10px, 1vw, 12px);
+  }
+  
+  .tech-list-item {
+    padding: clamp(15px, 1.5vw, 18px);
+  }
+  
+  /* Compact game section */
+  .game-container {
+    max-width: var(--content-max-width-wide);
+  }
+  
+  .game-item {
+    padding: clamp(30px, 3vw, 35px);
+    margin-bottom: clamp(40px, 4vw, 50px);
+  }
+}
+
+/* Ultra-wide Desktop Screens */
+@media (min-width: 1800px) {
+  :root {
+    --section-padding-y: clamp(3rem, 4vw, 5rem);
+    --section-gap: clamp(2rem, 2.5vw, 3rem);
+  }
+  
+  /* Even more compact on ultra-wide screens */
+  .container {
+    max-width: 1200px;
+    gap: var(--section-gap);
+  }
+  
+  /* 4-column grid for web projects on ultra-wide */
+  .web-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.5rem, 1.5vw, 2rem);
+    max-width: var(--content-max-width-ultra-wide);
+  }
+  
+  /* Ultra-wide optimizations */
+  .app-showcase,
+  .tech-lists-container,
+  .game-container {
+    max-width: var(--content-max-width-ultra-wide);
+  }
+}
+
+/* ==========================================================================
+   Enhanced Mobile Optimizations
+   ========================================================================== */
+
+/* Improved touch targets and mobile interactions */
+@media (max-width: 768px) {
+  /* Larger touch targets */
+  .web-card,
+  .tech-list-item,
+  .carousel-btn,
+  .btn,
+  .download-btn {
+    min-height: 44px; /* Apple HIG minimum touch target */
+  }
+  
+  .social-links a {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 12px;
+  }
+  
+  /* Better mobile carousel */
+  .carousel {
+    height: min(50vh, 300px);
+    border-radius: var(--radius-md);
+  }
+  
+  .carousel-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Mobile-optimized tech lists */
+  .tech-list-item {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+  }
+  
+  .tech-list-item .tech-icon {
+    font-size: 32px;
+    min-width: 44px;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  /* Ensure proper spacing on small screens */
+  .web-grid {
+    gap: var(--space-md);
+  }
+  
+  .web-card {
+    min-height: 200px;
+  }
+  
+  /* Stack tech content vertically on very small screens */
+  .tech-list-item {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+  }
+  
+  .tech-list-item .tech-icon {
+    margin-right: 0;
+    margin-bottom: var(--space-xs);
   }
 }
