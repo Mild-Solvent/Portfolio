@@ -46,7 +46,8 @@ const imageError = ref(false)
 
 const currentImage = computed(() => {
   if (imageError.value) {
-    return '/images/placeholder.jpg' // fallback image
+    const base = import.meta.env.BASE_URL || '/'
+    return `${base}images/placeholder.jpg` // fallback image
   }
   
   return isHovered.value && props.project.hoverImage 

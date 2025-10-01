@@ -27,13 +27,18 @@ interface WebProject {
   alt: string
 }
 
+const getImagePath = (imageName: string) => {
+  const base = import.meta.env.BASE_URL || '/'
+  return `${base}images/${imageName}`
+}
+
 const webProjects: WebProject[] = [
   {
     id: 1,
     title: 'M&K Cleaning',
     description: 'Cleaning company website with complete booking system and stripe payments.',
-    image: '/images/web1.jpg',
-    hoverImage: '/images/web1-hover.jpg',
+    image: getImagePath('web1.jpg'),
+    hoverImage: getImagePath('web1-hover.jpg'),
     url: 'https://mkbratislava.sk',
     alt: 'M&K Cleaning website screenshot'
   },
@@ -41,8 +46,8 @@ const webProjects: WebProject[] = [
     id: 2,
     title: 'CEA Europe.sk',
     description: 'Advertising agency website.',
-    image: '/images/web2.jpg',
-    hoverImage: '/images/web2-hover.jpg',
+    image: getImagePath('web2.jpg'),
+    hoverImage: getImagePath('web2-hover.jpg'),
     url: 'https://new.ceaeurope.sk',
     alt: 'CEA Europe website screenshot'
   },
@@ -50,8 +55,8 @@ const webProjects: WebProject[] = [
     id: 3,
     title: 'TEDxRoatán',
     description: 'Independent TEDx Event organized on Island Roatán.',
-    image: '/images/web3.jpg',
-    hoverImage: '/images/web3-hover.jpg',
+    image: getImagePath('web3.jpg'),
+    hoverImage: getImagePath('web3-hover.jpg'),
     url: 'https://tedxroatan.com',
     alt: 'TEDxRoatán website screenshot'
   },
@@ -59,8 +64,8 @@ const webProjects: WebProject[] = [
     id: 4,
     title: 'Morpheus - product webpage',
     description: 'Raw HTML, CSS and js delivered via GitHub Pages. Undergoing development.',
-    image: '/images/web4.png',
-    hoverImage: '/images/web4-hover.png',
+    image: getImagePath('web4.png'),
+    hoverImage: getImagePath('web4-hover.png'),
     url: 'https://mild-solvent.github.io/Morpheus/',
     alt: 'Morpheus product webpage screenshot'
   }

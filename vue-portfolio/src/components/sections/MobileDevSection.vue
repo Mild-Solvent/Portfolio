@@ -73,18 +73,23 @@
 <script setup lang="ts">
 import ImageCarousel from '@/components/common/ImageCarousel.vue'
 
+const getImagePath = (imageName: string) => {
+  const base = import.meta.env.BASE_URL || '/'
+  return `${base}images/${imageName}`
+}
+
 // Mobile app images
 const mobileAppImages = [
   {
-    src: '/images/app1-1.png',
+    src: getImagePath('app1-1.png'),
     alt: 'Mobile app - Main screen with user interface'
   },
   {
-    src: '/images/app1-2.png',
+    src: getImagePath('app1-2.png'),
     alt: 'Mobile app - Feature showcase and functionality'
   },
   {
-    src: '/images/app1-3.png',
+    src: getImagePath('app1-3.png'),
     alt: 'Mobile app - Settings and configuration screen'
   }
 ]

@@ -59,49 +59,54 @@
 <script setup lang="ts">
 import ImageCarousel from '@/components/common/ImageCarousel.vue'
 
+const getImagePath = (imageName: string) => {
+  const base = import.meta.env.BASE_URL || '/'
+  return `${base}images/${imageName}`
+}
+
 // Experiment Echo images (Unreal Engine 5)
 const experimentEchoImages = [
   {
-    src: '/images/game1-1.png',
+    src: getImagePath('game1-1.png'),
     alt: 'Experiment Echo - Environment overview showing the game world'
   },
   {
-    src: '/images/game1-2.png',
+    src: getImagePath('game1-2.png'),
     alt: 'Experiment Echo - Character interaction scene'
   },
   {
-    src: '/images/game1-3.png',
+    src: getImagePath('game1-3.png'),
     alt: 'Experiment Echo - Interior environment design'
   },
   {
-    src: '/images/game1-4.png',
+    src: getImagePath('game1-4.png'),
     alt: 'Experiment Echo - Gameplay mechanics demonstration'
   },
   {
-    src: '/images/game1-5.png',
+    src: getImagePath('game1-5.png'),
     alt: 'Experiment Echo - Advanced AI interaction'
   },
   {
-    src: '/images/game1-6.png',
+    src: getImagePath('game1-6.png'),
     alt: 'Experiment Echo - Lighting and atmosphere showcase',
-    webp: '/images/game1-6.webp'
+    webp: getImagePath('game1-6.webp')
   },
   {
-    src: '/images/game1-7.png',
+    src: getImagePath('game1-7.png'),
     alt: 'Experiment Echo - Level design and architecture',
-    webp: '/images/game1-7.webp'
+    webp: getImagePath('game1-7.webp')
   },
   {
-    src: '/images/game1-8.png',
+    src: getImagePath('game1-8.png'),
     alt: 'Experiment Echo - Character models and animations',
-    webp: '/images/game1-8.webp'
+    webp: getImagePath('game1-8.webp')
   },
   {
-    src: '/images/game1-9.png',
+    src: getImagePath('game1-9.png'),
     alt: 'Experiment Echo - UI and game interface'
   },
   {
-    src: '/images/game1-10.png',
+    src: getImagePath('game1-10.png'),
     alt: 'Experiment Echo - Final scene composition'
   }
 ]
@@ -109,31 +114,31 @@ const experimentEchoImages = [
 // You Are The Loading Screen images (Godot)
 const loadingScreenGameImages = [
   {
-    src: '/images/IMG-20250710-WA0013.jpg',
+    src: getImagePath('IMG-20250710-WA0013.jpg'),
     alt: 'You are the loading screen - Main menu and title screen'
   },
   {
-    src: '/images/IMG-20250710-WA0014.jpg',
+    src: getImagePath('IMG-20250710-WA0014.jpg'),
     alt: 'You are the loading screen - Point and click interface'
   },
   {
-    src: '/images/IMG-20250710-WA0015.jpg',
+    src: getImagePath('IMG-20250710-WA0015.jpg'),
     alt: 'You are the loading screen - Room with computer terminal'
   },
   {
-    src: '/images/IMG-20250710-WA0016.jpg',
+    src: getImagePath('IMG-20250710-WA0016.jpg'),
     alt: 'You are the loading screen - Character interaction screen'
   },
   {
-    src: '/images/IMG-20250710-WA0017.jpg',
+    src: getImagePath('IMG-20250710-WA0017.jpg'),
     alt: 'You are the loading screen - City citizen simulation'
   },
   {
-    src: '/images/IMG-20250710-WA0018.jpg',
+    src: getImagePath('IMG-20250710-WA0018.jpg'),
     alt: 'You are the loading screen - Alternative universe environment'
   },
   {
-    src: '/images/IMG-20250710-WA0019.jpg',
+    src: getImagePath('IMG-20250710-WA0019.jpg'),
     alt: 'You are the loading screen - Adventure game mechanics'
   }
 ]
