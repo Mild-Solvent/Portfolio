@@ -13,6 +13,10 @@
       content="Denis Matejčík, Full Stack Developer, Web Development, Game Development, Mobile Apps, DevOps, Cloud Infrastructure, React, Next.js, Unreal Engine"
     />
     <meta name="author" content="Denis Matejčík" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="theme-color" content="#00d9ff" />
+    <meta name="msapplication-TileColor" content="#00d9ff" />
     <meta
       property="og:title"
       content="Denis Matejčík - Full Stack Developer Portfolio"
@@ -49,6 +53,64 @@
     />
 
     <link rel="canonical" href="https://mild-solvent.github.io/portfolio/" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Denis Matejčík",
+      "jobTitle": "Full Stack Developer",
+      "description": "Full Stack Developer specializing in web development, game development, mobile apps, DevOps & cloud infrastructure.",
+      "url": "https://mild-solvent.github.io/portfolio/",
+      "image": "https://mild-solvent.github.io/portfolio/images/og-image.jpg",
+      "email": "mailto:matejcik.denis@gmail.com",
+      "sameAs": [
+        "https://github.com/Mild-Solvent",
+        "https://www.linkedin.com/in/denis-matejcik/",
+        "https://wa.me/qr/QCT7GFP2BR2IG1"
+      ],
+      "knowsAbout": [
+        "Web Development",
+        "Game Development", 
+        "Mobile App Development",
+        "DevOps",
+        "Cloud Infrastructure",
+        "React",
+        "Next.js",
+        "Unreal Engine",
+        "JavaScript",
+        "Node.js",
+        "MongoDB",
+        "Docker",
+        "Kubernetes"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Full Stack Developer",
+        "occupationLocation": {
+          "@type": "Country",
+          "name": "Slovakia"
+        }
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Denis Matejčík Portfolio",
+      "description": "Portfolio showcasing web development, game development, mobile apps, and DevOps projects by Denis Matejčík.",
+      "url": "https://mild-solvent.github.io/portfolio/",
+      "author": {
+        "@type": "Person",
+        "name": "Denis Matejčík"
+      },
+      "inLanguage": "en-US"
+    }
+    </script>
+    
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
@@ -84,6 +146,7 @@
             src="images/web1.jpg"
             alt="M&K Cleaning"
             data-hover="images/web1-hover.jpg"
+            loading="lazy"
           />
           <div class="web-card-content">
             <h3>M&K Cleaning</h3>
@@ -101,6 +164,7 @@
             src="images/web2.jpg"
             alt="CEA Europe.sk"
             data-hover="images/web2-hover.jpg"
+            loading="lazy"
           />
           <div class="web-card-content">
             <h3>CEA Europe.sk</h3>
@@ -115,6 +179,7 @@
             src="images/web3.jpg"
             alt="TEDxRoatán"
             data-hover="images/web3-hover.jpg"
+            loading="lazy"
           />
           <div class="web-card-content">
             <h3>TEDxRoatán</h3>
@@ -129,6 +194,7 @@
             src="images/web4.png"
             alt="General Web Development"
             data-hover="images/web4-hover.png"
+            loading="lazy"
           />
           <div class="web-card-content">
             <h3>Morpheus - product webpage</h3>
@@ -150,34 +216,43 @@
           <div class="carousel">
             <div class="carousel-track" data-carousel="0">
               <div class="carousel-slide">
-                <img src="images/game1-1.png" alt="Game Screenshot 1" />
+                <img src="images/game1-1.png" alt="Game Screenshot 1" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="images/game1-2.png" alt="Game Screenshot 2" />
+                <img src="images/game1-2.png" alt="Game Screenshot 2" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="images/game1-3.png" alt="Game Screenshot 3" />
+                <img src="images/game1-3.png" alt="Game Screenshot 3" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="images/game1-4.png" alt="Game Screenshot 4" />
+                <img src="images/game1-4.png" alt="Game Screenshot 4" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="images/game1-5.png" alt="Game Screenshot 5" />
+                <img src="images/game1-5.png" alt="Game Screenshot 5" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="images/game1-6.png" alt="Game Screenshot 6" />
+                <picture>
+                  <source srcset="images/game1-6.webp" type="image/webp">
+                  <img src="images/game1-6.png" alt="Game Screenshot 6" loading="lazy" />
+                </picture>
               </div>
               <div class="carousel-slide">
-                <img src="images/game1-7.png" alt="Game Screenshot 7" />
+                <picture>
+                  <source srcset="images/game1-7.webp" type="image/webp">
+                  <img src="images/game1-7.png" alt="Game Screenshot 7" loading="lazy" />
+                </picture>
               </div>
               <div class="carousel-slide">
-                <img src="images/game1-8.png" alt="Game Screenshot 8" />
+                <picture>
+                  <source srcset="images/game1-8.webp" type="image/webp">
+                  <img src="images/game1-8.png" alt="Game Screenshot 8" loading="lazy" />
+                </picture>
               </div>
               <div class="carousel-slide">
-                <img src="images/game1-9.png" alt="Game Screenshot 9" />
+                <img src="images/game1-9.png" alt="Game Screenshot 9" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="images/game1-10.png" alt="Game Screenshot 10" />
+                <img src="images/game1-10.png" alt="Game Screenshot 10" loading="lazy" />
               </div>
             </div>
             <div class="carousel-controls">
@@ -212,42 +287,49 @@
                 <img
                   src="images/IMG-20250710-WA0013.jpg"
                   alt="Game Screenshot 1"
+                  loading="lazy"
                 />
               </div>
               <div class="carousel-slide">
                 <img
                   src="images/IMG-20250710-WA0014.jpg"
                   alt="Game Screenshot 2"
+                  loading="lazy"
                 />
               </div>
               <div class="carousel-slide">
                 <img
                   src="images/IMG-20250710-WA0015.jpg"
                   alt="Game Screenshot 3"
+                  loading="lazy"
                 />
               </div>
               <div class="carousel-slide">
                 <img
                   src="images/IMG-20250710-WA0016.jpg"
                   alt="Game Screenshot 4"
+                  loading="lazy"
                 />
               </div>
               <div class="carousel-slide">
                 <img
                   src="images/IMG-20250710-WA0017.jpg"
                   alt="Game Screenshot 5"
+                  loading="lazy"
                 />
               </div>
               <div class="carousel-slide">
                 <img
                   src="images/IMG-20250710-WA0018.jpg"
                   alt="Game Screenshot 6"
+                  loading="lazy"
                 />
               </div>
               <div class="carousel-slide">
                 <img
                   src="images/IMG-20250710-WA0019.jpg"
                   alt="Game Screenshot 7"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -287,13 +369,13 @@
           >
             <div class="carousel-track" data-carousel="2">
               <div class="carousel-slide">
-                <img src="images/app1-1.png" alt="App Screenshot 1" />
+                <img src="images/app1-1.png" alt="App Screenshot 1" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="images/app1-2.png" alt="App Screenshot 2" />
+                <img src="images/app1-2.png" alt="App Screenshot 2" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="images/app1-3.png" alt="App Screenshot 3" />
+                <img src="images/app1-3.png" alt="App Screenshot 3" loading="lazy" />
               </div>
             </div>
             <div class="carousel-controls">

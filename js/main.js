@@ -1,17 +1,32 @@
-// Mouse Trail Particles
+// Performance and device detection
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+const isLowPerformance = navigator.hardwareConcurrency <= 2;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Mouse Trail Particles - optimized for performance
 function initMouseTrail() {
+  // Skip mouse trail on mobile or low-performance devices
+  if (isMobile || isLowPerformance || reducedMotion) return;
+  
   let mouseX = 0;
   let mouseY = 0;
   let trailDelay = 0;
+  let isThrottled = false;
   
   document.addEventListener('mousemove', (e) => {
+    if (isThrottled) return;
+    
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    // Create trail particles with delay
+    // Create trail particles with delay - reduced frequency
     trailDelay++;
-    if (trailDelay % 3 === 0) { // Create particle every 3rd mouse move
+    if (trailDelay % 6 === 0) { // Create particle every 6th mouse move instead of 3rd
       createTrailParticle(mouseX, mouseY);
+      
+      // Throttle to prevent excessive particle creation
+      isThrottled = true;
+      setTimeout(() => { isThrottled = false; }, 16); // ~60fps
     }
   });
 }
@@ -43,11 +58,16 @@ function createTrailParticle(x, y) {
   setTimeout(() => particle.remove(), 1000);
 }
 
-// Enhanced Particle System
+// Enhanced Particle System - optimized
 function createParticles() {
   const particlesContainer = document.getElementById("particles");
-  const particleCount = 30;
+  
+  // Reduce particle count on mobile/low-performance devices
+  let particleCount = isMobile || isLowPerformance ? 15 : 30;
+  if (reducedMotion) particleCount = 5;
 
+  const fragment = document.createDocumentFragment(); // Better performance
+  
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement("div");
     particle.className = "particle";
@@ -71,28 +91,47 @@ function createParticles() {
       colors[Math.floor(Math.random() * colors.length)];
     particle.style.boxShadow = `0 0 ${size * 2}px ${particle.style.background}`;
 
-    particlesContainer.appendChild(particle);
+    fragment.appendChild(particle);
   }
+  
+  particlesContainer.appendChild(fragment);
 }
 
-// Parallax Effect
+// Parallax Effect - optimized with throttling
 function initParallax() {
-  const parallaxContainer = document.querySelector(".parallax-container");
+  if (reducedMotion || isMobile) return; // Skip on mobile or reduced motion
+  
   const gradientBg = document.querySelector(".gradient-bg");
+  let ticking = false;
+  let lastScrollTop = 0;
+
+  function updateParallax() {
+    const scrolled = window.pageYOffset;
+    
+    // Only update if scroll position changed significantly
+    if (Math.abs(scrolled - lastScrollTop) > 5) {
+      const parallaxSpeed = 0.5;
+      gradientBg.style.transform = `translateY(${
+        scrolled * parallaxSpeed
+      }px)`;
+      
+      // Reduced particle creation frequency
+      if (Math.random() > 0.995 && !isLowPerformance) {
+        createScrollParticle();
+      }
+      
+      lastScrollTop = scrolled;
+    }
+    
+    ticking = false;
+  }
 
   window.addEventListener("scroll", () => {
-    const scrolled = window.pageYOffset;
-    const parallaxSpeed = 0.5;
-
-    gradientBg.style.transform = `translateY(${
-      scrolled * parallaxSpeed
-    }px)`;
-
-    // Add floating particles on scroll
-    if (Math.random() > 0.98) {
-      createScrollParticle();
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
     }
-  });
+  }, { passive: true });
 }
 
 // Create particles on scroll
@@ -198,16 +237,33 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Hover particle effects for interactive elements
+// Hover particle effects for interactive elements - optimized
 function addHoverParticles() {
+  if (isMobile || reducedMotion) return; // Skip on mobile
+  
   const interactiveElements = document.querySelectorAll(
     ".glass, .download-btn, .tech-card"
   );
+  
+  // Use Intersection Observer to only add listeners for visible elements
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.addEventListener("mouseenter", handleHover, { passive: true });
+      } else {
+        entry.target.removeEventListener("mouseenter", handleHover);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  function handleHover(e) {
+    if (!isLowPerformance) {
+      createHoverParticles(e.target);
+    }
+  }
 
   interactiveElements.forEach((element) => {
-    element.addEventListener("mouseenter", (e) => {
-      createHoverParticles(e.target);
-    });
+    observer.observe(element);
   });
 }
 

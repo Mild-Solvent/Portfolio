@@ -42,6 +42,7 @@ body {
   font-family: "Orbitron", "Rajdhani", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, sans-serif;
   background: #000000;
+  color: #ffffff; /* Fallback */
   color: var(--text-primary);
   overflow-x: hidden;
   position: relative;
@@ -145,13 +146,13 @@ body {
 
 /* Enhanced Glass Effect with Holographic Shimmer */
 .glass {
+  /* Fallback background for older browsers */
+  background: rgba(0, 20, 40, 0.85);
   background: linear-gradient(
     135deg,
     rgba(0, 20, 40, 0.6),
     rgba(0, 40, 80, 0.3)
   );
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
   border: 1px solid var(--glass-border);
   border-radius: 20px;
   box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.2),
@@ -160,6 +161,19 @@ body {
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Apply backdrop-filter only when supported */
+@supports (backdrop-filter: blur(20px)) {
+  .glass {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 20, 40, 0.6),
+      rgba(0, 40, 80, 0.3)
+    );
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  }
 }
 
 /* Animated gradient border */
